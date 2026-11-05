@@ -1189,11 +1189,23 @@ $('familiarToggle').onclick=()=>{friend.enabled=!friend.enabled;saveFamiliar();i
 // Intentional reset lives in general Preferences, away from everyday Moss controls.
 // It is explicit and confirmed; tasks and other preferences remain untouched.
 $('reviewForest').addEventListener('click',openForestReview);
-$('forestReviewClose').addEventListener('click',closeForestReview);
-$('forestDiscoveryClose').addEventListener('click',closeForestDiscovery);
-$('forestExplore').addEventListener('click',()=>{closeForestDiscovery();openForestReview()});
-$('forestReviewModal').addEventListener('click',e=>{if(e.target===$('forestReviewModal'))closeForestReview()});
-$('forestDiscoveryModal').addEventListener('click',e=>{if(e.target===$('forestDiscoveryModal'))closeForestDiscovery()});
+// The modal markup is placed after the app scripts. Use delegated events so
+// controls added later in document parsing always receive their handlers.
+document.addEventListener('click',e=>{
+ const target=e.target.closest('button,[role="dialog"]');
+ if(!target)return;
+ if(target.id==='forestReviewClose'){closeForestReview();return;}
+ if(target.id==='forestDiscoveryClose'){closeForestDiscovery();return;}
+ if(target.id==='forestExplore'){closeForestDiscovery();openForestReview();return;}
+ if(target.id==='forestReviewModal'&&e.target===target){closeForestReview();return;}
+ if(target.id==='forestDiscoveryModal'&&e.target===target){closeForestDiscovery();return;}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){
+  if(!$('forestReviewModal').hidden)closeForestReview();
+  if(!$('forestDiscoveryModal').hidden)closeForestDiscovery();
+ }
+});
 $('resetMoss').addEventListener('click',()=>{
  if(!confirm('Reset Moss to Sproutling? This will permanently clear his evolution, lifetime growth points, and Living Forest discoveries. Your tasks and preferences will stay as they are. This cannot be undone.'))return;
  friend.points=0;

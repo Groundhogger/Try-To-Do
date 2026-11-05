@@ -22,4 +22,6 @@ v54 changes:
 - Bumps the service-worker cache version.
 
 
-Version 55: clearer Living Forest review control, first-load recognition of already-earned discoveries, and cache refresh.
+Version 56: clearer Living Forest review control, first-load recognition of already-earned discoveries, and cache refresh.
+
+Version 56: fixed Living Forest modal controls with delegated click handling and Escape-to-close support; cache version v12.
