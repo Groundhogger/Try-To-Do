@@ -1,5 +1,5 @@
 Try To Do List — General Productivity App
-Version: v51 — Permanent Moss Evolution & Living Forest
+Version: v54 — Permanent Moss Evolution, Living Forest & Optional Reset
 
 This is the General app package. Keep it separate from Try-To-Do-Education.
 
@@ -14,3 +14,9 @@ v51 changes:
 Deployment:
 Upload the contents of this folder to the root of the Try-To-Do-General GitHub repository.
 Do not upload this ZIP file into the repository. Keep a backup of the current files first.
+
+v54 changes:
+- Adds an intentional “Reset Moss to Sproutling” control under Settings → Preferences, away from the everyday Moss settings.
+- Requires confirmation and resets only Moss’s evolution, lifetime growth points and Living Forest discoveries; tasks and preferences are preserved.
+- Keeps automatic progress protection in place everywhere else; the reset is the sole intentional way to restart Moss.
+- Bumps the service-worker cache version.
