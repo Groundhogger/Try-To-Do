@@ -20,3 +20,6 @@ v54 changes:
 - Requires confirmation and resets only Moss’s evolution, lifetime growth points and Living Forest discoveries; tasks and preferences are preserved.
 - Keeps automatic progress protection in place everywhere else; the reset is the sole intentional way to restart Moss.
 - Bumps the service-worker cache version.
+
+
+Version 55: clearer Living Forest review control, first-load recognition of already-earned discoveries, and cache refresh.
