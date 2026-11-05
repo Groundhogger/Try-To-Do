@@ -1,4 +1,4 @@
-const CACHE_NAME = "try-to-do-list-pwa-v6";
+const CACHE_NAME = "try-to-do-list-pwa-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
