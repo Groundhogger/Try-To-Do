@@ -1,10 +1,14 @@
-Try To Do List — PWA with Moss Home Screen Icon
+Try To Do List — General Productivity App
+Version: v50 — Moss Companion Visual Feedback Fix
 
-Upload the CONTENTS of this folder to the root of your HTTPS-hosted site. Keep index.html, manifest.json, service-worker.js, the icons folder, and Moss images together.
+This is the General app package. Keep it separate from Try-To-Do-Education.
 
-The in-app “Add to Home Screen” button launches the Android install prompt when the browser supports it. On iPhone it displays Safari Share > Add to Home Screen instructions. The app icon is Moss.
+v50 changes:
+- Makes Moss visibly move and brighten while Work Alongside Moss is active.
+- Gives Moss a distinct, settled resting appearance when the companion is paused.
+- Adds a clearer working-state label treatment.
+- Bumps the service-worker cache version so GitHub Pages clients can receive the update.
 
-iPhone: use Safari, tap Share, Add to Home Screen, then Add.
-Samsung/Android: use Chrome; tap the in-app button and confirm Install. If no prompt appears, use Chrome menu > Install app / Add to Home screen.
-
-Requires HTTPS. This package does not add accounts or cloud sync. Existing local browser data remains local to that browser/device. Test on the intended devices before replacing a live deployment.
+Deployment:
+Upload the contents of this folder to the root of the Try-To-Do-General GitHub repository.
+Do not upload this ZIP file into the repository. Keep a backup of the current files first.

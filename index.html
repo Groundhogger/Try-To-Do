@@ -561,6 +561,36 @@ footer{color:#66705d!important}
 .pwa-help-card h2{font-size:22px;line-height:1.2;margin:8px 24px 14px 0;color:#294332}.pwa-help-card p,.pwa-help-card li{font-size:15px;line-height:1.55}.pwa-help-card ol{padding-left:22px}.pwa-help-card li{margin:8px 0}.pwa-help-moss{display:block;width:82px;height:82px;object-fit:contain;border-radius:18px;background:#f0f1e7;margin:0 auto 10px}.pwa-help-close{position:absolute;right:12px;top:8px;border:0;background:transparent;font-size:30px;line-height:1;color:#52634f;cursor:pointer}.pwa-help-done{display:block;width:100%;border:0;border-radius:12px;background:#456849;color:#fff;font-weight:700;padding:12px;margin-top:18px;cursor:pointer}
 
 .app-settings{border:1px solid #d9dfd1;border-radius:14px;background:rgba(255,253,246,.82);padding:10px 13px;margin-top:10px}.app-settings>summary{cursor:pointer;font-weight:750;color:#365b3d;list-style:none}.app-settings>summary::-webkit-details-marker{display:none}.app-settings>summary:after{content:'＋';float:right}.app-settings[open]>summary:after{content:'−'}.app-settings[open]>section{margin-top:12px;padding-top:10px;border-top:1px solid #e4e8df}.app-settings .friend-options{padding-top:10px}
+
+/* v50: make the body-doubling state visibly distinct on the actual Moss artwork. */
+#familiarArt.is-working #mossEvolutionImage {
+  animation: mossCompanionWork 2.2s ease-in-out infinite;
+  filter: saturate(1.18) drop-shadow(0 7px 8px rgba(55,91,53,.28)) !important;
+}
+#familiarArt.is-resting #mossEvolutionImage {
+  animation: none !important;
+  transform: translateY(7px) rotate(2deg) scale(.94) !important;
+  filter: saturate(.78) brightness(.98) !important;
+}
+#familiarArt.is-working .scene-label {
+  color: #315940;
+  background: rgba(248,250,235,.88);
+  border: 1px solid rgba(93,125,79,.38);
+  border-radius: 999px;
+  width: fit-content;
+  left: 50%; right: auto;
+  transform: translateX(-50%);
+  padding: 4px 11px;
+  box-shadow: 0 2px 8px rgba(48,75,43,.12);
+}
+#familiarArt.is-resting .scene-label { opacity: .72; }
+@keyframes mossCompanionWork {
+  0%,100% { transform: translateY(0) rotate(0deg) scale(1.015); }
+  50% { transform: translateY(-7px) rotate(-1.2deg) scale(1.045); }
+}
+@media(prefers-reduced-motion:reduce) {
+  #familiarArt.is-working #mossEvolutionImage { animation:none!important; transform:translateY(-3px) scale(1.025)!important; }
+}
 </style></head>
 <body>
 
