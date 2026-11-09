@@ -1,9 +1,13 @@
-const CACHE_NAME = "try-to-do-list-pwa-v16";
+const CACHE_NAME = "try-to-do-list-pwa-v17";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icons/icon-192.png",
+  "./icons/moss-icon-192-v2.png",
+  "./icons/moss-icon-512-v2.png",
+  "./icons/moss-icon-512-maskable-v2.png",
+  "./icons/apple-touch-icon-v2.png",
   "./icons/icon-512.png",
   "./icons/icon-512-maskable.png",
   "./moss-form-1.webp",

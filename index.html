@@ -3,7 +3,7 @@
 <title>Try To Do List</title>
 <meta name="theme-color" content="#b5c7a8">
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-v2.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Try To Do List">
 
@@ -620,6 +620,7 @@ footer{color:#66705d!important}
 .forest-world-card{width:min(100%,900px);max-height:94vh;overflow:auto;border:2px solid #b6a16d;border-radius:24px;background:linear-gradient(160deg,#f8f2df,#e4ead7);color:#2e422f;box-shadow:0 24px 80px #07180dcc}
 .forest-world-hero{height:clamp(210px,34vw,330px);position:relative;overflow:hidden;border-radius:18px 18px 0 0;background:#243d2a}
 .forest-world-hero img{width:100%;height:100%;object-fit:cover;object-position:38% 48%;display:block;filter:brightness(.82)}
+.forest-sanctuary-breathe{position:absolute;right:16px;top:16px;z-index:3;border:1px solid #f4e9c5;background:rgba(31,57,39,.92);color:#fff4d5;border-radius:999px;padding:11px 15px;font-weight:700;box-shadow:0 4px 16px #0006;cursor:pointer}.forest-sanctuary-breathe:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .forest-world-heading{position:absolute;left:0;right:0;bottom:0;padding:24px 22px 16px;background:linear-gradient(transparent,rgba(14,34,21,.88));color:#fff4d5}
 .forest-world-heading h2{font-family:Georgia,serif;font-size:clamp(1.7rem,4vw,2.5rem);margin:0;text-shadow:0 2px 8px #172719}
 .forest-world-heading p{margin:4px 0 0;font-style:italic}
@@ -1521,7 +1522,7 @@ render();renderFamiliar();paint();
  <div class="forest-modal-card"><div class="forest-modal-art" id="forestDiscoveryArt">🌿</div><div class="tag">Living Forest discovery</div><h2 id="forestDiscoveryTitle">A New Discovery!</h2><p class="forest-modal-copy" id="forestDiscoveryDescription"></p><p class="forest-modal-copy" id="forestDiscoveryMilestone"></p><div class="forest-modal-actions"><button id="forestExplore" type="button">Explore the Living Forest</button><button id="forestDiscoveryClose" class="secondary" type="button">Lovely</button></div></div>
 </div>
 <div id="forestReviewModal" class="forest-modal forest-world-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
- <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
+ <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><button type="button" id="forestBreatheHero" class="forest-sanctuary-breathe">☾ Breathe with Moss</button><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
  <div class="forest-world-progress"><div><strong>🌲 Your discoveries</strong><span id="forestReviewProgress"></span></div><div class="forest-world-bar"><span id="forestWorldBar"></span></div><p id="forestNextNote"></p></div>
  <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestBreatheOpen" type="button">☾ Breathe with Moss</button><button id="forestReviewClose" type="button">← Back to Moss</button></div></div>
  <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
@@ -1535,7 +1536,10 @@ render();renderFamiliar();paint();
    </div>
   </article>
  </div>
- <div id="forestBreathingModal" class="forest-story-modal forest-breathing-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestBreathingTitle">
+
+ </div>
+</div>
+ <div id="forestBreathingModal" class="forest-modal forest-story-modal forest-breathing-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestBreathingTitle">
   <article class="forest-breathing-card">
    <button type="button" class="forest-story-x" id="forestBreathingClose" aria-label="Close breathing break">×</button>
    <div class="forest-breathing-scene">
@@ -1551,10 +1555,19 @@ render();renderFamiliar();paint();
     <p class="forest-story-ending">The forest will be here when you return. Take your time.</p>
    </div>
   </article>
- </div>
 </div>
+<script>
+// Explicit top-level handlers keep the breathing overlay reliably dismissible.
+(function(){
+ const close=document.getElementById('forestBreathingClose');
+ const hero=document.getElementById('forestBreatheHero');
+ if(close) close.addEventListener('click',function(event){event.preventDefault();event.stopPropagation();closeForestBreathing();},true);
+ if(hero) hero.addEventListener('click',function(event){event.preventDefault();event.stopPropagation();openForestBreathing();},true);
+})();
+</script>
 
 <style>
+.forest-breathing-modal{position:fixed;inset:0;z-index:10030;border-radius:0}
 #appUpdateNotice{position:fixed;z-index:10050;left:16px;right:16px;bottom:16px;max-width:520px;margin:0 auto;padding:14px 16px;background:#203b2d;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px;font:inherit}
 #appUpdateNotice[hidden]{display:none}
 #appUpdateNotice .update-copy{flex:1;font-size:14px;line-height:1.35}
