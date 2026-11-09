@@ -1,11 +1,16 @@
 Try To Do List — General Productivity App
-Version: v67 — Living Forest Visual Polish
+Version: v51 — Permanent Moss Evolution & Living Forest
 
-- Refines the Living Forest hero banner so the image fills the full area.
-- Makes Breathe with Moss a compact floating pill rather than a large panel.
-- Tightens progress and introduction spacing.
-- Improves discovery card alignment, spacing and mobile sizing.
-- Preserves the working story dismissal, standalone breathing experience, Moss icons and app data.
-- Service-worker cache version v25.
+This is the General app package. Keep it separate from Try-To-Do-Education.
 
-Deploy by backing up the General repository and uploading the extracted contents of this folder to the repository root. Keep the Education app separate.
+v51 changes:
+- Keeps Moss's five evolution forms permanent: once he reaches Elder of the Wildwood, he never cycles back to Sproutling.
+- Preserves the earned Elder appearance after the final evolution.
+- Adds the Living Forest progression after Moss's final evolution, with permanent discoveries at 25, 50, 75, 100 and 125 lifetime growth points.
+- Shows lifetime growth points and the next forest discovery; progress continues to accumulate rather than resetting.
+- Retains the v50 Moss companion visual feedback improvements.
+- Bumps the service-worker cache version so GitHub Pages clients can receive the update.
+
+Deployment:
+Upload the contents of this folder to the root of the Try-To-Do-General GitHub repository.
+Do not upload this ZIP file into the repository. Keep a backup of the current files first.
