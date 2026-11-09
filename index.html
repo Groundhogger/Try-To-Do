@@ -3,7 +3,7 @@
 <title>Try To Do List</title>
 <meta name="theme-color" content="#b5c7a8">
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-v2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/moss-home-apple-touch-v4.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Try To Do List">
 
@@ -1025,38 +1025,12 @@ function openForestStory(at){
  $('forestStoryEnding').textContent=item.ending;
  $('forestStoryModal').hidden=false;
 }
+// Breathing is controlled by a standalone controller at the end of the document.
 let forestBreathTimer=null,forestBreathPhase=0,forestBreathRunning=false;
-const forestBreathSteps=[{label:'Breathe in gently',seconds:4},{label:'Pause softly',seconds:2},{label:'Breathe out slowly',seconds:6}];
-function setForestBreathCue(){
- const step=forestBreathSteps[forestBreathPhase%forestBreathSteps.length];
- $('forestBreathingCue').textContent=step.label;
- $('forestBreathOrb').classList.remove('inhale','pause','exhale');
- $('forestBreathOrb').classList.add(forestBreathPhase%3===0?'inhale':forestBreathPhase%3===1?'pause':'exhale');
-}
-function startForestBreathing(){
- if(forestBreathRunning)return;
- forestBreathRunning=true;$('forestBreathingStart').textContent='Continue breathing';
- setForestBreathCue();
- let remaining=forestBreathSteps[forestBreathPhase%3].seconds;
- forestBreathTimer=window.setInterval(()=>{
-  remaining--;
-  if(remaining<=0){forestBreathPhase=(forestBreathPhase+1)%3;setForestBreathCue();remaining=forestBreathSteps[forestBreathPhase].seconds;}
- },1000);
-}
-function pauseForestBreathing(){
- if(forestBreathTimer){window.clearInterval(forestBreathTimer);forestBreathTimer=null;}
- forestBreathRunning=false;
- $('forestBreathingCue').textContent='Paused. Take all the time you need.';
- $('forestBreathOrb').classList.remove('inhale','pause','exhale');
-}
-function openForestBreathing(){
- pauseForestBreathing();forestBreathPhase=0;
- $('forestBreathingStart').textContent='Begin breathing';
- $('forestBreathingCue').textContent="When you're ready, begin. There's nowhere else you need to be.";
- $('forestBreathingNote').textContent='A gentle rhythm: breathe in, pause, and slowly breathe out. Follow your own comfortable pace.';
- $('forestBreathingModal').hidden=false;
-}
-function closeForestBreathing(){pauseForestBreathing();$('forestBreathingModal').hidden=true;}
+function startForestBreathing(){}
+function pauseForestBreathing(){}
+function openForestBreathing(){}
+function closeForestBreathing(){}
 function closeForestStory(){const m=$('forestStoryModal');if(m)m.hidden=true;}
 function openForestReview(){
  const modal=$('forestReviewModal'),gallery=$('forestGallery');if(!modal||!gallery)return;
@@ -1477,7 +1451,7 @@ render();renderFamiliar();paint();
 <div id="pwaInstallHelp" class="pwa-help-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="pwaHelpTitle">
  <div class="pwa-help-card">
   <button type="button" class="pwa-help-close" id="pwaHelpClose" aria-label="Close">×</button>
-  <img class="pwa-help-moss" src="./icons/icon-192.png" alt="Moss" />
+  <img class="pwa-help-moss" src="./icons/moss-home-icon-v3.png" alt="Moss" />
   <h2 id="pwaHelpTitle">Add Try To Do List to your phone</h2>
   <div id="pwaHelpAndroid" hidden><p>Your browser can install this app. Choose <strong>Install</strong> when the prompt appears.</p><p>If you don't see a prompt, open your browser menu <strong>⋮</strong> and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p></div>
   <div id="pwaHelpIOS" hidden><ol><li>Open this page in <strong>Safari</strong>.</li><li>Tap the <strong>Share</strong> button <span aria-hidden="true">□↑</span>.</li><li>Scroll down and tap <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong> in the top corner.</li></ol><p>Moss will then appear on your Home Screen.</p></div>
@@ -1524,7 +1498,7 @@ render();renderFamiliar();paint();
 <div id="forestReviewModal" class="forest-modal forest-world-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
  <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><button type="button" id="forestBreatheHero" class="forest-sanctuary-breathe">☾ Breathe with Moss</button><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
  <div class="forest-world-progress"><div><strong>🌲 Your discoveries</strong><span id="forestReviewProgress"></span></div><div class="forest-world-bar"><span id="forestWorldBar"></span></div><p id="forestNextNote"></p></div>
- <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">← Back to Moss</button></div></div>
+ <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">⌂ Return to Main</button></div></div>
  <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
   <article class="forest-story-card">
    <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story">×</button>
@@ -1543,35 +1517,22 @@ render();renderFamiliar();paint();
   <article class="forest-breathing-card">
    <button type="button" class="forest-story-x" id="forestBreathingClose" aria-label="Close breathing break">×</button>
    <div class="forest-breathing-scene">
-    <img src="./moss-form-5.webp" alt="Moss resting peacefully in the forest">
-    <div class="forest-breath-orb" id="forestBreathOrb"></div>
+    <img src="./moss-breathing-scene-v1.jpg" alt="Moss resting peacefully with his eyes closed">
+    <div class="forest-chest-glow" id="forestChestGlow" aria-hidden="true"></div>
+    <div class="forest-breath-orb" id="forestBreathOrb" aria-hidden="true"></div>
    </div>
    <div class="forest-breathing-copy">
     <p class="forest-story-kicker">A QUIET MOMENT IN THE WOODS</p>
     <h2 id="forestBreathingTitle">Breathe with Moss</h2>
     <p id="forestBreathingCue" aria-live="polite">When you're ready, begin. There's nowhere else you need to be.</p>
-    <div class="forest-breathing-controls"><button type="button" id="forestBreathingStart">Begin breathing</button><button type="button" class="secondary" id="forestBreathingStop">Pause</button></div>
+    <div class="forest-breathing-options"><label for="forestBreathingPattern">Breathing rhythm</label><select id="forestBreathingPattern"><option value="gentle">Gentle · 4–2–6</option><option value="slow">Slow · 4–4–8</option><option value="natural">Natural breathing</option></select></div>
+     <div class="forest-breathing-controls"><button type="button" id="forestBreathingStart">Begin breathing</button><button type="button" class="secondary" id="forestBreathingStop">Pause</button></div>
     <p class="forest-breathing-note" id="forestBreathingNote">A gentle rhythm: breathe in, pause, and slowly breathe out. Follow your own comfortable pace.</p>
-    <p class="forest-story-ending">The forest will be here when you return. Take your time.</p>
+    <p class="forest-story-ending">The forest will be here when you return. Take your time.</p><button type="button" class="secondary" id="forestBreathingReturn">Return to Main</button>
    </div>
   </article>
 </div>
-<script>
-// Direct control bindings: avoid relying on delegated clicks inside nested forest dialogs.
-(function(){
- const hero=document.getElementById('forestBreatheHero');
- const close=document.getElementById('forestBreathingClose');
- const start=document.getElementById('forestBreathingStart');
- const pause=document.getElementById('forestBreathingStop');
- if(hero) hero.onclick=function(event){event.preventDefault();event.stopPropagation();openForestBreathing();};
- if(close) close.onclick=function(event){event.preventDefault();event.stopPropagation();closeForestBreathing();};
- if(start) start.onclick=function(event){event.preventDefault();event.stopPropagation();startForestBreathing();};
- if(pause) pause.onclick=function(event){event.preventDefault();event.stopPropagation();pauseForestBreathing();};
- // Expose named controls for accessibility and any existing inline integrations.
- window.openForestBreathing=openForestBreathing;
- window.closeForestBreathing=closeForestBreathing;
-})();
-</script>
+
 
 <style>
 .forest-breathing-modal{position:fixed;inset:0;z-index:10030;border-radius:0}
@@ -1643,4 +1604,106 @@ render();renderFamiliar();paint();
 #forestStoryModal .forest-story-card{position:relative;margin:auto}
 #forestStoryModal[hidden]{display:none!important}
 </style>
-</body></html>
+
+<style>
+/* Standalone Moss breathing experience */
+#forestBreathingModal{position:fixed!important;inset:0!important;z-index:10080!important;display:flex;align-items:center;justify-content:center;overflow:auto;background:rgba(10,25,15,.94);padding:calc(env(safe-area-inset-top,12px) + 8px) 12px calc(env(safe-area-inset-bottom,12px) + 8px)}
+#forestBreathingModal[hidden]{display:none!important}
+#forestBreathingModal .forest-breathing-card{position:relative;width:min(760px,100%);max-height:100%;overflow:auto;margin:auto;border:3px solid #c8b66d;border-radius:24px;background:#f5efd9;box-shadow:0 18px 55px #0009}
+#forestBreathingModal .forest-breathing-scene{position:relative;overflow:hidden;background:#193323}
+#forestBreathingModal .forest-breathing-scene img{display:block;width:100%;height:auto;max-height:48vh;object-fit:cover}
+#forestBreathingModal .forest-chest-glow{position:absolute;left:51%;top:64%;width:22%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(.78);background:radial-gradient(circle,rgba(255,226,115,.64),rgba(255,211,83,.22) 48%,transparent 72%);opacity:.45;pointer-events:none;transition:transform 4s ease-in-out,opacity 4s ease-in-out}
+#forestBreathOrb{position:absolute;right:8%;top:16%;width:clamp(76px,17vw,132px);aspect-ratio:1;border:3px solid #e4d18b;border-radius:50%;background:rgba(25,55,32,.78);box-shadow:0 0 22px #f3dc83aa;transform:scale(.86);transition:transform 4s ease-in-out,box-shadow 4s ease-in-out}
+#forestBreathOrb.inhale{transform:scale(1.12);box-shadow:0 0 38px #f5df8b}
+#forestBreathOrb.pause{transform:scale(1.12);transition-duration:2s}
+#forestBreathOrb.exhale{transform:scale(.86);transition-duration:6s}
+#forestChestGlow.inhale{transform:translate(-50%,-50%) scale(1.14);opacity:.95;transition-duration:4s}
+#forestChestGlow.pause{transform:translate(-50%,-50%) scale(1.14);opacity:.85;transition-duration:2s}
+#forestChestGlow.exhale{transform:translate(-50%,-50%) scale(.78);opacity:.38;transition-duration:6s}
+#forestBreathingCue{font-size:1.2rem;font-weight:700;color:#314c35;text-align:center}
+#forestBreathingControls,#forestBreathingOptions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:8px 12px}
+#forestBreathingModal .forest-breathing-copy{padding:16px 20px 22px}
+#forestBreathingModal .forest-story-x{z-index:2}
+@media(max-width:520px){#forestBreathingModal .forest-breathing-scene img{max-height:42vh}#forestBreathingModal .forest-breathing-copy{padding:12px}#forestBreathingModal .forest-breathing-card{border-radius:18px}}
+</style>
+<script>
+/* Fully independent breathing controller: does not depend on the main app's $ helper or event delegation. */
+(function(){
+  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn,{once:true}); else fn(); }
+  ready(function(){
+    const byId=id=>document.getElementById(id);
+    const hero=byId('forestBreatheHero'), modal=byId('forestBreathingModal');
+    const close=byId('forestBreathingClose'), start=byId('forestBreathingStart'), pause=byId('forestBreathingStop');
+    const cue=byId('forestBreathingCue'), orb=byId('forestBreathOrb'), chest=byId('forestChestGlow');
+    const forest=byId('forestReviewModal'), returnMain=byId('forestBreathingReturn'), forestClose=byId('forestReviewClose');
+    if(!hero||!modal||!close||!start||!pause||!cue||!orb||!chest) return;
+    let timer=null, phase=0, running=false, mode='gentle', remaining=0;
+    const patterns={
+      gentle:[{label:'Breathe in gently',seconds:4,cls:'inhale'},{label:'Rest softly',seconds:2,cls:'pause'},{label:'Breathe out slowly',seconds:6,cls:'exhale'}],
+      slow:[{label:'Breathe in gently',seconds:4,cls:'inhale'},{label:'Rest softly',seconds:4,cls:'pause'},{label:'Breathe out slowly',seconds:8,cls:'exhale'}]
+    };
+    function paint(){
+      orb.className='forest-breath-orb'; chest.className='forest-chest-glow';
+      if(mode==='natural'){cue.textContent='Breathe naturally, at your own comfortable pace.';return;}
+      const step=patterns[mode][phase];
+      cue.textContent=step.label+' · '+remaining+' seconds';
+      orb.classList.add(step.cls); chest.classList.add(step.cls);
+    }
+    function stopTimer(){if(timer){clearInterval(timer);timer=null;}running=false;}
+    function tick(){
+      remaining--;
+      if(remaining<=0){phase=(phase+1)%patterns[mode].length;remaining=patterns[mode][phase].seconds;}
+      paint();
+    }
+    function begin(){
+      if(running)return;
+      if(mode==='natural'){running=true;start.textContent='Pause natural breathing';cue.textContent='Follow your own comfortable breathing. No counting.';return;}
+      running=true;start.textContent='Breathing…';paint();
+      timer=setInterval(tick,1000);
+    }
+    function pauseBreath(){
+      stopTimer();start.textContent='Continue breathing';
+      orb.className='forest-breath-orb';chest.className='forest-chest-glow';
+      cue.textContent='Paused. Return to your natural breathing whenever you like.';
+    }
+    function open(){
+      stopTimer();phase=0;mode='gentle';remaining=4;
+      const selector=byId('forestBreathingPattern');if(selector)selector.value='gentle';
+      start.textContent='Begin breathing';cue.textContent='When you are ready, begin. There is nowhere else you need to be.';
+      modal.hidden=false;modal.style.display='flex';
+    }
+    function shut(){
+      pauseBreath();modal.hidden=true;modal.style.display='none';
+      if(forest && !forest.hidden) forest.focus?.();
+    }
+    if(returnMain) returnMain.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();if(forest)forest.hidden=true;},true);
+    if(forestClose) forestClose.textContent='Return to Main';
+    hero.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();open();},true);
+    close.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();},true);
+    start.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();if(mode==='natural'&&running){pauseBreath();start.textContent='Begin natural breathing';}else begin();},true);
+    pause.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();pauseBreath();},true);
+    const selector=byId('forestBreathingPattern');
+    if(selector) selector.addEventListener('change',function(){
+      pauseBreath();mode=selector.value==='slow'?'slow':selector.value==='natural'?'natural':'gentle';
+      phase=0;remaining=mode==='slow'?4:4;start.textContent='Begin breathing';
+      cue.textContent=mode==='natural'?'Breathe naturally, at your own comfortable pace.':'When you are ready, begin.';
+      orb.className='forest-breath-orb';chest.className='forest-chest-glow';
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)shut();});
+    window.openForestBreathing=open;window.closeForestBreathing=shut;
+    modal.hidden=true;modal.style.display='none';
+  });
+})();
+</script>
+\n</body></html>
+
+<style>
+.forest-breathing-modal{position:fixed!important;inset:0!important;z-index:10080!important;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(14,29,17,.88)!important}
+.forest-breathing-modal[hidden]{display:none!important}.forest-breathing-scene{isolation:isolate}.forest-breathing-scene img{transform-origin:50% 72%}
+.forest-breathing-scene.is-breathing img{animation:moss-body-breath 12s ease-in-out infinite}
+.forest-breathing-scene:before{content:"";position:absolute;z-index:2;left:50%;top:62%;width:86px;height:58px;transform:translate(-50%,-50%) scale(.72);border-radius:50%;background:radial-gradient(ellipse,rgba(255,226,132,.65),rgba(255,226,132,0) 72%);opacity:0;pointer-events:none}
+.forest-breathing-scene.is-breathing:before{animation:moss-chest-glow 12s ease-in-out infinite}
+@keyframes moss-body-breath{0%,50%,100%{transform:scale(1)}16.6%,25%{transform:scale(1.025,1.045)}}
+@keyframes moss-chest-glow{0%{opacity:.15;transform:translate(-50%,-50%) scale(.72)}33.3%,50%{opacity:.85;transform:translate(-50%,-50%) scale(1.25)}100%{opacity:.15;transform:translate(-50%,-50%) scale(.72)}}
+@media(prefers-reduced-motion:reduce){.forest-breathing-scene.is-breathing img,.forest-breathing-scene.is-breathing:before{animation:none!important}}
+</style>

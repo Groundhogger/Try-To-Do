@@ -1,5 +1,5 @@
 Try To Do List — General Productivity App
-Version: v61 — Forest Breathing Access & Moss Home-Screen Icon
+Version: v64 — Standalone Breathing, Moss Animation & Navigation
 
 This is the General app package. Keep it separate from Try-To-Do-Education.
 
@@ -55,3 +55,31 @@ v63 changes:
 - Fixes Breathe with Moss controls with direct click bindings for the forest hero button, breathing start, pause, and close.
 - Removes the duplicate Breathe with Moss button at the bottom of the Living Forest.
 - Bumps service-worker cache to v20.
+
+
+Version 64 changes:
+- Rebuilds Living Forest breathing as a standalone controller, independent of the main app startup scope.
+- Breathe with Moss opens from the forest with independent start, pause, close, and Escape controls.
+- Adds an eyes-closed Moss illustration and gentle 4-2-6 chest/glow breathing animation.
+- Renames the forest exit to “Return to Main”.
+- Uses newly versioned Moss home-screen icons and Apple touch icon; cache v21.
+
+Corrected v64 package:
+- Internal folder and documentation consistently identify v64.
+- Breathe with Moss uses a standalone event controller independent of the main app's click delegation and helper functions.
+- Added selectable Gentle (4-2-6), Slow (4-4-8), and Natural breathing options.
+- Added synchronized chest-glow expansion/contraction with the inhale, pause, and exhale phases.
+- Added explicit close, Escape, and Return to Main behavior.
+- Forest exit label changed to Return to Main.
+- Updated Moss home-screen icon references to uniquely versioned v4 assets.
+- Service-worker cache bumped to v22.
+
+FINAL v64 PACKAGE CONTENTS
+- Standalone breathing controller is bound directly to the forest hero button and its own controls; it does not rely on the app's delegated event system or main-app helper functions.
+- Breathing options: Gentle 4-2-6, Slow 4-4-8, and Natural breathing.
+- Moss breathing artwork shows eyes closed; a synchronized chest glow expands on inhale, remains gently lit during the pause, and softens on exhale.
+- Close (X), Escape, and Return to Main controls are wired in the standalone controller.
+- Forest exit label is Return to Main.
+- Manifest and Apple touch icon point to uniquely versioned Moss v4 icon assets.
+- Service-worker cache: try-to-do-list-pwa-v22.
+- This package has passed ZIP integrity and JavaScript syntax checks. Live iPhone testing remains necessary.

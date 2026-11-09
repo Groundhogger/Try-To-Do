@@ -1,13 +1,12 @@
-const CACHE_NAME = "try-to-do-list-pwa-v20";
+const CACHE_NAME = "try-to-do-list-pwa-v22";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/moss-icon-192-v2.png",
-  "./icons/moss-icon-512-v2.png",
-  "./icons/moss-icon-512-maskable-v2.png",
-  "./icons/apple-touch-icon-v2.png",
+  "./icons/moss-home-icon-v4.png",
+  "./icons/moss-home-icon-512-v4.png",
+  "./icons/moss-home-icon-maskable-v4.png",
+  "./icons/moss-home-apple-touch-v4.png",
   "./icons/icon-512.png",
   "./icons/icon-512-maskable.png",
   "./moss-form-1.webp",
@@ -16,6 +15,7 @@ const APP_SHELL = [
   "./moss-form-4.webp",
   "./moss-form-5.webp",
   "./living-forest-scene.jpg",
+  "./moss-breathing-scene-v1.jpg",
   "./forest-brook.jpg",
   "./forest-fern.jpg",
   "./forest-fireflies.jpg",
