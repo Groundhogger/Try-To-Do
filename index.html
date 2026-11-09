@@ -1524,7 +1524,7 @@ render();renderFamiliar();paint();
 <div id="forestReviewModal" class="forest-modal forest-world-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
  <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><button type="button" id="forestBreatheHero" class="forest-sanctuary-breathe">☾ Breathe with Moss</button><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
  <div class="forest-world-progress"><div><strong>🌲 Your discoveries</strong><span id="forestReviewProgress"></span></div><div class="forest-world-bar"><span id="forestWorldBar"></span></div><p id="forestNextNote"></p></div>
- <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestBreatheOpen" type="button">☾ Breathe with Moss</button><button id="forestReviewClose" type="button">← Back to Moss</button></div></div>
+ <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">← Back to Moss</button></div></div>
  <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
   <article class="forest-story-card">
    <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story">×</button>
@@ -1557,12 +1557,19 @@ render();renderFamiliar();paint();
   </article>
 </div>
 <script>
-// Explicit top-level handlers keep the breathing overlay reliably dismissible.
+// Direct control bindings: avoid relying on delegated clicks inside nested forest dialogs.
 (function(){
- const close=document.getElementById('forestBreathingClose');
  const hero=document.getElementById('forestBreatheHero');
- if(close) close.addEventListener('click',function(event){event.preventDefault();event.stopPropagation();closeForestBreathing();},true);
- if(hero) hero.addEventListener('click',function(event){event.preventDefault();event.stopPropagation();openForestBreathing();},true);
+ const close=document.getElementById('forestBreathingClose');
+ const start=document.getElementById('forestBreathingStart');
+ const pause=document.getElementById('forestBreathingStop');
+ if(hero) hero.onclick=function(event){event.preventDefault();event.stopPropagation();openForestBreathing();};
+ if(close) close.onclick=function(event){event.preventDefault();event.stopPropagation();closeForestBreathing();};
+ if(start) start.onclick=function(event){event.preventDefault();event.stopPropagation();startForestBreathing();};
+ if(pause) pause.onclick=function(event){event.preventDefault();event.stopPropagation();pauseForestBreathing();};
+ // Expose named controls for accessibility and any existing inline integrations.
+ window.openForestBreathing=openForestBreathing;
+ window.closeForestBreathing=closeForestBreathing;
 })();
 </script>
 

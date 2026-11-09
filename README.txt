@@ -49,3 +49,9 @@ Version 62 changes:
 - Makes Living Forest story cards viewport-level overlays on mobile.
 - Adds direct touch/click close handlers for both the story X and Back to the forest button, plus backdrop dismissal.
 - Bumps service-worker cache to v19.
+
+
+v63 changes:
+- Fixes Breathe with Moss controls with direct click bindings for the forest hero button, breathing start, pause, and close.
+- Removes the duplicate Breathe with Moss button at the bottom of the Living Forest.
+- Bumps service-worker cache to v20.
