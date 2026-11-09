@@ -1,5 +1,10 @@
-const CACHE_NAME = "try-to-do-list-pwa-v22";
+const CACHE_NAME = "try-to-do-list-pwa-v23";
 const APP_SHELL = [
+  "./apple-touch-icon.png",
+  "./apple-touch-icon-v5.png",
+  "./icons/moss-home-icon-v5.png",
+  "./icons/moss-home-icon-512-v5.png",
+  "./icons/moss-home-icon-maskable-v5.png",
   "./",
   "./index.html",
   "./manifest.json",

@@ -3,7 +3,7 @@
 <title>Try To Do List</title>
 <meta name="theme-color" content="#b5c7a8">
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" sizes="180x180" href="./icons/moss-home-apple-touch-v4.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v5.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Try To Do List">
 
@@ -1506,7 +1506,7 @@ render();renderFamiliar();paint();
    <div class="forest-story-copy"><p class="forest-story-kicker">A LIVING FOREST STORY</p><h2 id="forestStoryTitle"></h2>
     <p id="forestStoryText"></p><h3>Moss’s little part in the story</h3><p id="forestStoryInteraction"></p>
     <div class="forest-story-gift" id="forestStoryGift"></div><p class="forest-story-ending" id="forestStoryEnding"></p>
-    <button type="button" id="forestStoryDone" class="forest-story-done">Back to the forest</button>
+    <button type="button" id="forestStoryDone" class="forest-story-done">Return to the forest</button>
    </div>
   </article>
  </div>
@@ -1581,20 +1581,20 @@ render();renderFamiliar();paint();
 
 
 <script>
-// Independent story-dialog controls: keep the story dismissible on touch devices
-// even when it is displayed inside the Living Forest dialog.
+// Make story cards independent of the forest modal, so their controls remain reachable.
 (function(){
   var story=document.getElementById('forestStoryModal');
+  if(story && story.parentElement !== document.body) document.body.appendChild(story);
   var close=document.getElementById('forestStoryClose');
   var done=document.getElementById('forestStoryDone');
-  if(close) close.addEventListener('click',function(e){
-    e.preventDefault();e.stopPropagation();closeForestStory();
-  },true);
-  if(done) done.addEventListener('click',function(e){
-    e.preventDefault();e.stopPropagation();closeForestStory();
-  },true);
+  function dismiss(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    closeForestStory();
+  }
+  if(close) close.addEventListener('click',dismiss,true);
+  if(done) done.addEventListener('click',dismiss,true);
   if(story) story.addEventListener('click',function(e){
-    if(e.target===story) closeForestStory();
+    if(e.target===story) dismiss(e);
   },true);
 })();
 </script>
