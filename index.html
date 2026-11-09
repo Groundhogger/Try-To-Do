@@ -684,6 +684,129 @@ footer{color:#66705d!important}
 @media(max-width:620px){.forest-breathing-card{display:block;width:100%;max-height:94%;border-radius:16px}.forest-breathing-scene{min-height:190px;height:190px}.forest-breathing-scene img{height:190px}.forest-breath-orb{width:130px;height:130px}.forest-breathing-copy{padding:17px 18px 20px}}
 </style>
 
+
+<style id="forest-visual-polish-v67">
+/* Living Forest: make the hero read as one continuous woodland scene. */
+#forestReviewModal .forest-world-card{
+  width:min(100%,900px);
+  border-radius:22px;
+  overflow:hidden;
+  background:#f2ecd9;
+}
+#forestReviewModal .forest-world-hero{
+  height:clamp(235px,42vw,340px);
+  border-radius:0;
+  isolation:isolate;
+}
+#forestReviewModal .forest-world-hero img{
+  position:absolute;
+  inset:0;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center 44%;
+  filter:brightness(.88);
+}
+#forestReviewModal .forest-sanctuary-breathe{
+  position:absolute!important;
+  top:16px!important;
+  right:16px!important;
+  left:auto!important;
+  bottom:auto!important;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  width:auto!important;
+  min-width:0!important;
+  max-width:calc(100% - 32px);
+  padding:11px 17px!important;
+  margin:0!important;
+  white-space:nowrap;
+  font-size:clamp(.88rem,2.5vw,1rem)!important;
+  line-height:1.2!important;
+  border-radius:999px!important;
+  background:rgba(25,53,35,.94)!important;
+  color:#fff4d5!important;
+  border:1.5px solid rgba(255,244,213,.9)!important;
+  box-shadow:0 4px 15px #0006!important;
+}
+#forestReviewModal .forest-world-heading{
+  padding:30px 22px 18px;
+  background:linear-gradient(transparent,rgba(14,34,21,.9));
+}
+#forestReviewModal .forest-world-heading h2{
+  font-size:clamp(1.8rem,5vw,2.45rem);
+  line-height:1.08;
+}
+#forestReviewModal .forest-world-heading p{
+  max-width:36rem;
+  font-size:clamp(.95rem,2.7vw,1.1rem);
+  line-height:1.35;
+}
+#forestReviewModal .forest-world-progress{
+  padding:17px 20px 13px;
+}
+#forestReviewModal .forest-world-progress>div:first-child{
+  align-items:baseline;
+}
+#forestReviewModal .forest-world-progress>div:first-child strong{
+  font-size:1.08rem;
+}
+#forestReviewModal .forest-world-progress span{
+  line-height:1.4;
+}
+#forestReviewModal .forest-world-intro{
+  padding:16px 20px 8px;
+  font-size:clamp(1rem,2.8vw,1.18rem);
+  line-height:1.45;
+}
+#forestReviewModal .forest-gallery{
+  gap:12px;
+  padding:8px 16px 20px;
+  margin-top:4px;
+}
+#forestReviewModal .forest-gallery-item{
+  gap:14px;
+  align-items:center;
+  padding:13px;
+  border-radius:18px;
+  box-shadow:0 2px 7px rgba(54,65,39,.07);
+}
+#forestReviewModal .forest-gallery-item img,
+#forestReviewModal .forest-gallery-item .forest-gallery-image{
+  width:94px;
+  height:94px;
+  flex:0 0 94px;
+  object-fit:cover;
+  border-radius:14px;
+}
+#forestReviewModal .forest-gallery-item strong{
+  line-height:1.25;
+  margin-bottom:5px;
+}
+#forestReviewModal .forest-gallery-item small{
+  line-height:1.4;
+}
+@media(max-width:520px){
+  #forestReviewModal .forest-world-hero{height:250px}
+  #forestReviewModal .forest-sanctuary-breathe{
+    top:13px!important;right:13px!important;
+    padding:10px 13px!important;
+    font-size:.86rem!important;
+  }
+  #forestReviewModal .forest-world-heading{padding:24px 17px 15px}
+  #forestReviewModal .forest-world-progress{padding:15px 17px 12px}
+  #forestReviewModal .forest-world-intro{padding:14px 17px 7px}
+  #forestReviewModal .forest-gallery{padding:8px 12px 18px}
+  #forestReviewModal .forest-gallery-item{padding:11px;gap:11px}
+  #forestReviewModal .forest-gallery-item img,
+  #forestReviewModal .forest-gallery-item .forest-gallery-image{
+    width:82px;height:82px;flex-basis:82px;
+  }
+}
+</style>
+
 </head>
 <body>
 
