@@ -1,5 +1,5 @@
 Try To Do List — General Productivity App
-Version: v54 — Permanent Moss Evolution, Living Forest & Optional Reset
+Version: v61 — Forest Breathing Access & Moss Home-Screen Icon
 
 This is the General app package. Keep it separate from Try-To-Do-Education.
 
@@ -43,3 +43,9 @@ v61 changes:
 - Bumps the service-worker cache version.
 
 Deployment: back up the current repository, then upload the extracted contents of this folder to the repository root. Existing home-screen shortcuts may need to be removed and re-added once for their icon to refresh, especially on iOS.
+
+Version 62 changes:
+- Moves the update-ready notice to the top safe area with stronger contrast and a larger action button.
+- Makes Living Forest story cards viewport-level overlays on mobile.
+- Adds direct touch/click close handlers for both the story X and Back to the forest button, plus backdrop dismissal.
+- Bumps service-worker cache to v19.
