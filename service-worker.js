@@ -1,4 +1,4 @@
-const CACHE_NAME = "try-to-do-list-pwa-v29";
+const CACHE_NAME = "try-to-do-list-pwa-v30";
 const APP_SHELL = [
   "./apple-touch-icon.png",
   "./apple-touch-icon-v5.png",

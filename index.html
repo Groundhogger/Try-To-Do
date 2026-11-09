@@ -1964,7 +1964,7 @@ render();renderFamiliar();paint();
       pauseBreath();modal.hidden=true;modal.style.display='none';
       if(forest && !forest.hidden) forest.focus?.();
     }
-    if(returnMain) returnMain.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();if(forest)forest.hidden=true;},true);
+    if(returnMain) returnMain.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();if(typeof window.closeForestReview==='function'){window.closeForestReview();}else{if(forest){forest.hidden=true;forest.setAttribute('aria-hidden','true');}document.body.classList.remove('forest-page-open');document.body.style.overflow='';window.scrollTo(0,0);}},true);
     if(forestClose) forestClose.textContent='Return to Main';
     hero.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();open();},true);
     close.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();},true);
