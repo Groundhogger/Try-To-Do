@@ -3,7 +3,7 @@
 <title>Try To Do List</title>
 <meta name="theme-color" content="#b5c7a8">
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v5.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Try To Do List">
 
@@ -599,7 +599,349 @@ footer{color:#66705d!important}
 .forest-unlocks{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px}
 .forest-unlock{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#fff9e8;border:1px solid #c5c99e;font-size:.8rem}
 .forest-next,.forest-lifetime{display:block;font-size:.78rem;color:#53634b;margin-top:4px}
-</style></head>
+
+/* Living Forest discovery celebration and review gallery */
+.forest-modal{position:fixed;inset:0;z-index:10020;background:rgba(18,34,24,.78);display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}
+.forest-modal[hidden]{display:none!important}
+.forest-modal-card{width:min(100%,470px);max-height:90vh;overflow:auto;border:1px solid #c5c99e;border-radius:22px;background:linear-gradient(160deg,#f8f4e6,#e8efdc);color:#294331;padding:22px;box-shadow:0 18px 60px #0006;text-align:center}
+.forest-modal-card h2{margin:5px 0 8px;color:#294331}
+.forest-modal-art{font-size:3.1rem;line-height:1.35;margin:8px 0}
+.forest-modal-copy{color:#53634b;line-height:1.5}
+.forest-modal-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.forest-gallery{display:grid;gap:10px;text-align:left;margin-top:14px}
+.forest-gallery-item{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid #c5c99e;border-radius:14px;background:#fffdf5}
+.forest-gallery-item.locked{opacity:.68;background:#edf0e8}
+.forest-gallery-icon{font-size:1.8rem;min-width:38px;text-align:center}
+.forest-gallery-item strong{display:block;color:#294331}
+.forest-gallery-item small{display:block;color:#66745d;margin-top:3px}
+</style><style>
+#reviewForest{font-size:1rem}
+.forest-world-modal{padding:12px;align-items:flex-start}
+.forest-world-card{width:min(100%,900px);max-height:94vh;overflow:auto;border:2px solid #b6a16d;border-radius:24px;background:linear-gradient(160deg,#f8f2df,#e4ead7);color:#2e422f;box-shadow:0 24px 80px #07180dcc}
+.forest-world-hero{height:clamp(210px,34vw,330px);position:relative;overflow:hidden;border-radius:18px 18px 0 0;background:#243d2a}
+.forest-world-hero img{width:100%;height:100%;object-fit:cover;object-position:38% 48%;display:block;filter:brightness(.82)}
+.forest-sanctuary-breathe{position:absolute;right:16px;top:16px;z-index:3;border:1px solid #f4e9c5;background:rgba(31,57,39,.92);color:#fff4d5;border-radius:999px;padding:11px 15px;font-weight:700;box-shadow:0 4px 16px #0006;cursor:pointer}.forest-sanctuary-breathe:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.forest-world-heading{position:absolute;left:0;right:0;bottom:0;padding:24px 22px 16px;background:linear-gradient(transparent,rgba(14,34,21,.88));color:#fff4d5}
+.forest-world-heading h2{font-family:Georgia,serif;font-size:clamp(1.7rem,4vw,2.5rem);margin:0;text-shadow:0 2px 8px #172719}
+.forest-world-heading p{margin:4px 0 0;font-style:italic}
+.forest-world-progress{padding:16px 20px 10px;background:#f2ecd9;border-bottom:1px solid #d4c69f}
+.forest-world-progress>div:first-child{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.forest-world-progress span{color:#526449;font-size:.9rem}
+.forest-world-bar{height:9px;background:#d7d0b8;border-radius:99px;overflow:hidden;margin-top:9px}
+.forest-world-bar span{display:block;height:100%;background:linear-gradient(90deg,#668b48,#a2b96b);border-radius:99px;transition:width .5s}
+.forest-world-progress p{margin:7px 0 0;font-size:.86rem;color:#63724f}
+.forest-world-intro{padding:14px 20px 4px;font-family:Georgia,serif;font-style:italic;color:#526449}
+.forest-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;padding:12px 18px}
+.forest-discovery-card{position:relative;display:grid;grid-template-columns:92px 1fr;gap:11px;align-items:center;min-height:112px;padding:9px;border-radius:16px;border:1px solid #c4b58b;background:linear-gradient(145deg,#fffdf3,#e9e4cf);box-shadow:0 3px 9px #344b2b18;overflow:hidden}
+.forest-discovery-card.awakened{border-color:#9ba96d;box-shadow:0 0 0 1px #d1d9a7,0 4px 12px #7b8e4a28}
+.forest-discovery-card.waiting{filter:saturate(.55);background:linear-gradient(145deg,#f1eddf,#d8d8c8)}
+.forest-discovery-art{height:92px;border-radius:12px;overflow:hidden;background:#60774d;box-shadow:inset 0 0 15px #1c331b55}.forest-discovery-art img{width:100%;height:100%;object-fit:cover;display:block}.forest-muted-art{filter:grayscale(1) brightness(.72)}
+
+.forest-discovery-detail strong{display:block;text-transform:capitalize;font-family:Georgia,serif;font-size:1rem;color:#344832}
+.forest-discovery-detail p{font-size:.82rem;line-height:1.35;margin:4px 0;color:#58654d}
+.forest-discovery-detail small{font-size:.73rem;color:#75805e}
+.forest-discovery-status{position:absolute;right:8px;top:5px;color:#5e7c3d;font-weight:bold}
+.forest-discovery-card.waiting .forest-discovery-status{color:#8a886e}
+.forest-world-card .forest-modal-actions{padding:0 18px 18px}
+@media(max-width:520px){.forest-world-modal{padding:5px}.forest-world-card{max-height:96vh;border-radius:17px}.forest-world-hero{height:220px}.forest-gallery{grid-template-columns:1fr;padding:10px}.forest-discovery-card{grid-template-columns:78px 1fr;min-height:96px}.forest-discovery-art{height:78px}}
+</style>
+
+<style>
+.forest-story-link{display:block;padding:0;border:0;background:none;text-align:left;color:#344832;font-family:Georgia,serif;font-size:1rem;font-weight:700;text-decoration:underline;text-decoration-color:#a6ad76;text-underline-offset:3px;cursor:pointer}
+.forest-story-link:hover{color:#718246}
+.forest-story-link:disabled{cursor:default;text-decoration:none;color:#737665}
+.forest-story-modal{position:absolute;inset:0;z-index:8;background:rgba(17,29,17,.72);display:flex;align-items:center;justify-content:center;padding:clamp(8px,3vw,26px);border-radius:inherit}
+.forest-story-card{position:relative;display:grid;grid-template-columns:minmax(220px,42%) 1fr;width:min(100%,760px);max-height:90%;overflow:auto;border:3px solid #c6a96c;border-radius:22px;background:linear-gradient(145deg,#fff8e7,#e9e4ce);box-shadow:0 18px 60px #07180dcc;color:#344832}
+.forest-story-image{width:100%;height:100%;min-height:390px;max-height:620px;object-fit:cover}
+.forest-story-copy{padding:clamp(18px,3vw,30px);align-self:center}
+.forest-story-kicker{font-size:.72rem;letter-spacing:.15em;font-weight:800;color:#8a7547;margin:0 0 8px}
+.forest-story-copy h2{font-family:Georgia,serif;font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.12;margin:0 30px 14px 0;color:#3b4b2f}
+.forest-story-copy p{font-family:Georgia,serif;font-size:1rem;line-height:1.55;color:#4d5842}
+.forest-story-copy h3{font-family:Georgia,serif;font-size:1.08rem;margin:20px 0 4px;color:#667642}
+.forest-story-gift{margin:18px 0 10px;padding:12px 14px;border-left:4px solid #8a9b57;background:#e3e8d2;border-radius:0 12px 12px 0;font-weight:700;color:#52633c}
+.forest-story-ending{font-family:Georgia,serif!important;font-style:italic;font-weight:700;color:#6b783f!important;text-align:center;margin:18px 0}
+.forest-story-x{position:absolute;right:10px;top:10px;z-index:2;width:38px;height:38px;border:0;border-radius:50%;background:#fff8e7;color:#405038;font-size:1.7rem;cursor:pointer;box-shadow:0 2px 8px #0003}
+.forest-story-done{display:block;margin:12px auto 0;padding:11px 20px;border:1px solid #87965a;border-radius:30px;background:#536d3e;color:#fff8e7;font-weight:700;cursor:pointer}
+@media(max-width:620px){.forest-story-modal{padding:8px}.forest-story-card{display:block;width:100%;max-height:94%;border-radius:16px}.forest-story-image{height:190px;min-height:190px;max-height:190px}.forest-story-copy{padding:17px 18px 20px}.forest-story-copy p{font-size:.94rem}.forest-story-copy h2{font-size:1.55rem}}
+</style>
+
+
+<style>
+.forest-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.forest-breathing-card{position:relative;display:grid;grid-template-columns:minmax(200px,42%) 1fr;width:min(100%,700px);max-height:90%;overflow:auto;border:3px solid #c6a96c;border-radius:22px;background:linear-gradient(145deg,#fff8e7,#e9e4ce);box-shadow:0 18px 60px #07180dcc;color:#344832}
+.forest-breathing-scene{position:relative;min-height:350px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(#b7cba5,#5d7650)}
+.forest-breathing-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#253d2b55,transparent 65%)}
+.forest-breathing-scene img{position:relative;z-index:1;width:100%;height:100%;max-height:460px;object-fit:contain;filter:drop-shadow(0 12px 14px #1e321d55)}
+.forest-breath-orb{position:absolute;z-index:0;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#f7eab7aa,#d9e9b655 60%,transparent 72%);transition:transform 4s ease-in-out,opacity 4s ease;opacity:.7}
+.forest-breath-orb.inhale{transform:scale(1.45);opacity:1}
+.forest-breath-orb.pause{transform:scale(1.45);opacity:.85;transition-duration:2s}
+.forest-breath-orb.exhale{transform:scale(.8);opacity:.55;transition-duration:6s}
+.forest-breathing-copy{padding:clamp(18px,3vw,30px);align-self:center}
+.forest-breathing-copy h2{font-family:Georgia,serif;font-size:clamp(1.6rem,3vw,2.1rem);color:#3b4b2f;margin:0 0 12px}
+.forest-breathing-copy p{font-family:Georgia,serif;line-height:1.55;color:#4d5842}
+.forest-breathing-controls{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.forest-breathing-note{font-size:.88rem;color:#66715b!important}
+@media(max-width:620px){.forest-breathing-card{display:block;width:100%;max-height:94%;border-radius:16px}.forest-breathing-scene{min-height:190px;height:190px}.forest-breathing-scene img{height:190px}.forest-breath-orb{width:130px;height:130px}.forest-breathing-copy{padding:17px 18px 20px}}
+</style>
+
+
+<style id="forest-visual-polish-v67">
+/* Living Forest: make the hero read as one continuous woodland scene. */
+#forestReviewModal .forest-world-card{
+  width:min(100%,900px);
+  border-radius:22px;
+  overflow:hidden;
+  background:#f2ecd9;
+}
+#forestReviewModal .forest-world-hero{
+  height:clamp(235px,42vw,340px);
+  border-radius:0;
+  isolation:isolate;
+}
+#forestReviewModal .forest-world-hero img{
+  position:absolute;
+  inset:0;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center 44%;
+  filter:brightness(.88);
+}
+#forestReviewModal .forest-sanctuary-breathe{
+  position:absolute!important;
+  top:16px!important;
+  right:16px!important;
+  left:auto!important;
+  bottom:auto!important;
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  width:auto!important;
+  min-width:0!important;
+  max-width:calc(100% - 32px);
+  padding:11px 17px!important;
+  margin:0!important;
+  white-space:nowrap;
+  font-size:clamp(.88rem,2.5vw,1rem)!important;
+  line-height:1.2!important;
+  border-radius:999px!important;
+  background:rgba(25,53,35,.94)!important;
+  color:#fff4d5!important;
+  border:1.5px solid rgba(255,244,213,.9)!important;
+  box-shadow:0 4px 15px #0006!important;
+}
+#forestReviewModal .forest-world-heading{
+  padding:30px 22px 18px;
+  background:linear-gradient(transparent,rgba(14,34,21,.9));
+}
+#forestReviewModal .forest-world-heading h2{
+  font-size:clamp(1.8rem,5vw,2.45rem);
+  line-height:1.08;
+}
+#forestReviewModal .forest-world-heading p{
+  max-width:36rem;
+  font-size:clamp(.95rem,2.7vw,1.1rem);
+  line-height:1.35;
+}
+#forestReviewModal .forest-world-progress{
+  padding:17px 20px 13px;
+}
+#forestReviewModal .forest-world-progress>div:first-child{
+  align-items:baseline;
+}
+#forestReviewModal .forest-world-progress>div:first-child strong{
+  font-size:1.08rem;
+}
+#forestReviewModal .forest-world-progress span{
+  line-height:1.4;
+}
+#forestReviewModal .forest-world-intro{
+  padding:16px 20px 8px;
+  font-size:clamp(1rem,2.8vw,1.18rem);
+  line-height:1.45;
+}
+#forestReviewModal .forest-gallery{
+  gap:12px;
+  padding:8px 16px 20px;
+  margin-top:4px;
+}
+#forestReviewModal .forest-gallery-item{
+  gap:14px;
+  align-items:center;
+  padding:13px;
+  border-radius:18px;
+  box-shadow:0 2px 7px rgba(54,65,39,.07);
+}
+#forestReviewModal .forest-gallery-item img,
+#forestReviewModal .forest-gallery-item .forest-gallery-image{
+  width:94px;
+  height:94px;
+  flex:0 0 94px;
+  object-fit:cover;
+  border-radius:14px;
+}
+#forestReviewModal .forest-gallery-item strong{
+  line-height:1.25;
+  margin-bottom:5px;
+}
+#forestReviewModal .forest-gallery-item small{
+  line-height:1.4;
+}
+@media(max-width:520px){
+  #forestReviewModal .forest-world-hero{height:250px}
+  #forestReviewModal .forest-sanctuary-breathe{
+    top:13px!important;right:13px!important;
+    padding:10px 13px!important;
+    font-size:.86rem!important;
+  }
+  #forestReviewModal .forest-world-heading{padding:24px 17px 15px}
+  #forestReviewModal .forest-world-progress{padding:15px 17px 12px}
+  #forestReviewModal .forest-world-intro{padding:14px 17px 7px}
+  #forestReviewModal .forest-gallery{padding:8px 12px 18px}
+  #forestReviewModal .forest-gallery-item{padding:11px;gap:11px}
+  #forestReviewModal .forest-gallery-item img,
+  #forestReviewModal .forest-gallery-item .forest-gallery-image{
+    width:82px;height:82px;flex-basis:82px;
+  }
+}
+</style>
+
+
+<style id="forest-discovery-mobile-scroll-v68">
+/* Discovery celebration: keep the whole dialog reachable on short mobile screens. */
+#forestDiscoveryModal{
+  position:fixed!important;
+  inset:0!important;
+  z-index:10030!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  padding:calc(env(safe-area-inset-top,12px) + 14px) 14px calc(env(safe-area-inset-bottom,12px) + 18px)!important;
+}
+#forestDiscoveryModal[hidden]{display:none!important}
+#forestDiscoveryModal .forest-modal-card{
+  width:min(100%,470px)!important;
+  max-height:none!important;
+  height:auto!important;
+  min-height:0!important;
+  flex:0 0 auto;
+  overflow:visible!important;
+  margin:auto 0!important;
+  padding:clamp(18px,5vw,24px)!important;
+  box-sizing:border-box;
+}
+#forestDiscoveryModal .forest-modal-actions{
+  position:sticky;
+  bottom:0;
+  z-index:2;
+  padding:12px 0 2px;
+  margin-top:14px;
+  background:linear-gradient(to bottom,rgba(248,244,230,0),#f1efdf 22%);
+}
+#forestDiscoveryModal .forest-modal-actions button{
+  min-height:46px;
+}
+@media(max-height:700px){
+  #forestDiscoveryModal{padding-top:calc(env(safe-area-inset-top,10px) + 8px)!important}
+  #forestDiscoveryModal .forest-modal-card{margin:0!important}
+  #forestDiscoveryModal .forest-modal-art{font-size:2.4rem;line-height:1.15;margin:4px 0}
+  #forestDiscoveryModal .forest-modal-card h2{margin:4px 0 6px}
+  #forestDiscoveryModal .forest-modal-copy{line-height:1.4;margin:8px 0}
+}
+</style>
+
+
+<style id="forest-world-page-scroll-v69">
+/* The Living Forest is a full-screen dialog. Scroll the dialog itself on iPhone,
+   rather than trapping scrolling inside the inner card. */
+#forestReviewModal{
+  position:fixed!important;
+  inset:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  height:100dvh!important;
+  max-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:contain;
+  touch-action:pan-y;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 10px calc(env(safe-area-inset-bottom,0px) + 18px)!important;
+}
+#forestReviewModal[hidden]{display:none!important}
+#forestReviewModal .forest-world-card{
+  flex:0 0 auto!important;
+  width:min(100%,900px)!important;
+  max-height:none!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+  margin:0 auto 12px!important;
+  box-sizing:border-box!important;
+}
+#forestReviewModal .forest-modal-actions{
+  position:static!important;
+  display:flex!important;
+  padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px))!important;
+}
+#forestReviewModal #forestReviewClose{
+  min-height:48px;
+  width:100%;
+  touch-action:manipulation;
+}
+@media(max-width:520px){
+  #forestReviewModal{padding-left:7px!important;padding-right:7px!important}
+  #forestReviewModal .forest-world-card{border-radius:17px!important}
+}
+</style>
+
+
+<style id="forest-page-structure-v70">
+/* The Living Forest is a real page view. It participates in document scrolling,
+   so iOS Safari never has to scroll a fixed overlay over a locked page. */
+body.forest-page-open{overflow-x:hidden!important;overflow-y:auto!important}
+body.forest-page-open>*:not(script):not(style):not(#forestReviewModal):not(#forestBreathingModal){
+ display:none!important;
+}
+body.forest-page-open #forestReviewModal{
+ position:relative!important;inset:auto!important;z-index:1!important;
+ display:block!important;width:100%!important;height:auto!important;
+ min-height:100vh;max-height:none!important;overflow:visible!important;
+ padding:0!important;margin:0!important;
+ align-items:initial!important;justify-content:initial!important;
+ background:#f2ecd9!important;
+ overscroll-behavior:auto!important;
+ -webkit-overflow-scrolling:auto!important;
+}
+body.forest-page-open #forestReviewModal[hidden]{display:none!important}
+body.forest-page-open #forestReviewModal .forest-world-card{
+ width:100%!important;max-width:900px!important;min-height:100vh!important;
+ height:auto!important;max-height:none!important;overflow:visible!important;
+ margin:0 auto!important;border-radius:0!important;box-shadow:none!important;
+}
+body.forest-page-open #forestReviewModal .forest-world-hero{height:clamp(235px,42vw,340px)!important}
+body.forest-page-open #forestReviewModal .forest-gallery{padding-bottom:24px!important}
+body.forest-page-open #forestReviewModal .forest-modal-actions{
+ position:static!important;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))!important;
+}
+body.forest-page-open #forestReviewModal #forestReviewClose{
+ width:100%;min-height:52px;touch-action:manipulation;
+}
+@media(min-width:901px){
+ body.forest-page-open #forestReviewModal .forest-world-card{border-radius:0!important}
+}
+</style>
+</head>
 <body>
 
 <div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
@@ -659,7 +1001,7 @@ footer{color:#66705d!important}
 <div style="flex:1;min-width:0"><strong id="familiarName">Moss, your little forest friend</strong><p id="familiarMessage" class="muted" style="margin:4px 0">Every little bit counts. Moss is happy to be here with you.</p><div class="tag" id="familiarStage">Sprout stage</div><div class="growth-track" aria-label="Growth progress"><div class="growth-fill" id="growthFill"></div></div><div class="muted" id="growthText">0 growth points · 5 to the next stage</div><div id="livingForest" hidden aria-live="polite"></div></div>
 </div>
 </div>
-<details class="app-settings"><summary>⚙ Moss settings</summary><div class="friend-options"><button class="secondary" id="familiarToggle" type="button">Hide Moss</button><button class="secondary" id="familiarCelebrate" type="button">Say hello</button><button class="secondary" id="familiarMood" type="button">Check in with Moss</button><span class="muted">Moss’s growth is permanent and cannot be reset from here.</span><label><input type="checkbox" id="mossMotionToggle" checked> Gentle animation</label><label><input type="checkbox" id="alwaysWorkMossToggle"> Always Work alongside Moss</label><span class="muted" id="familiarStatus" aria-live="polite"></span></div></details>
+<details class="app-settings"><summary>⚙ Moss settings</summary><div class="friend-options"><button class="secondary" id="familiarToggle" type="button">Hide Moss</button><button class="secondary" id="familiarCelebrate" type="button">Say hello</button><button class="secondary" id="familiarMood" type="button">Check in with Moss</button><span class="muted">Moss’s growth is permanent and cannot be reset from here.</span><button class="secondary" id="reviewForest" type="button" style="display:block;width:100%;margin:12px 0;font-weight:700">🌲 Explore the Living Forest</button><label><input type="checkbox" id="mossMotionToggle" checked> Gentle animation</label><label><input type="checkbox" id="alwaysWorkMossToggle"> Always Work alongside Moss</label><span class="muted" id="familiarStatus" aria-live="polite"></span></div></details>
 </section>
 <section style="margin-top:14px"><div style="display:flex;gap:10px;align-items:center;justify-content:space-between"><h2 style="margin:0">Your tasks</h2><select id="filter" aria-label="Filter tasks" style="max-width:145px"><option value="active">Active</option><option value="all">All tasks</option><option value="done">Completed</option></select></div><p class="muted">Your list and the suggestion library are separate. Use a suggestion without adding it, or add it to your list.</p><p class="muted">Choose <strong>Work alongside Moss</strong> when you want a gentle body-doubling companion. Moss stays with you while you work; it does not start a task timer or mark anything complete. Use the separate break timer whenever you want.</p><div id="tasks"></div><p id="undoNotice" class="muted" aria-live="polite"></p><button id="undoDelete" class="secondary" hidden type="button">Undo delete</button></section>
 </div><div>
@@ -673,6 +1015,12 @@ footer{color:#66705d!important}
 <label><input type="checkbox" id="reduceMotion"> Reduce Moss's movement</label>
 <label><input type="checkbox" id="gentleMessages" checked> Show gentle encouragement</label>
 <p class="muted">Your choices stay in this browser.</p>
+<div class="preference-reset" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#ddd)">
+<h3>Reset Moss</h3>
+<p class="muted">Start Moss’s journey over from Sproutling. This resets his evolution, lifetime growth points, and Living Forest discoveries. Your tasks and other preferences will not be changed.</p>
+<button id="resetMoss" class="quiet" type="button">Reset Moss to Sproutling</button>
+<span id="resetMossStatus" class="muted" aria-live="polite"></span>
+</div>
 </section>
 <section><h2>Back up your work</h2><p class="muted">Tasks are saved in this browser on this device. Export a backup before switching browsers, clearing site data, or moving devices. Importing a backup replaces the tasks currently saved here.</p><button id="export">Export backup</button><button id="import" class="secondary">Import backup</button><input hidden type="file" id="file" accept="application/json"></section>
 </details>
@@ -904,6 +1252,78 @@ function mossEvolution(){
  const next=forestMilestones.find(item=>points<item.at);
  return {title:titles[level],mark:['🌱','🍃','🌿','🌳','✨'][level],desc:descriptions[level],level:level+1,cycle:0,sublevel:level,pointsToNext:level===4?null:5-(points%5),forestMilestones,unlocked,nextForestAt:next?.at??null};
 }
+const FOREST_SEEN_STORE='trytodo.forest.seen.v1';
+function forestSeen(){try{const v=JSON.parse(localStorage.getItem(FOREST_SEEN_STORE)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}}
+function saveForestSeen(ids){try{localStorage.setItem(FOREST_SEEN_STORE,JSON.stringify([...new Set(ids)]))}catch(e){}}
+function showForestDiscovery(item){
+ const modal=$('forestDiscoveryModal');if(!modal||!item)return;
+ $('forestDiscoveryArt').textContent=item.icon;$('forestDiscoveryTitle').textContent=item.label;
+ $('forestDiscoveryDescription').textContent=({25:'A soft green corner of the woodland is taking shape. Ferns unfurl where little steps have landed.',50:'Mushrooms and mossy stones bring new texture and life to the forest floor.',75:'Tiny fireflies now dance through the trees whenever evening settles in.',100:'A clear little brook winds through the woodland, bringing a gentle new sound to the forest.',125:'A sheltering old tree rises above the woodland, a home for all the small things that grow.'})[item.at]||'A new part of the woodland has grown because of your steady little steps.';
+ $('forestDiscoveryMilestone').textContent=`Unlocked at ${item.at} lifetime growth points`;
+ modal.hidden=false;document.body.style.overflow='hidden';
+}
+function closeForestDiscovery(){const m=$('forestDiscoveryModal');if(m)m.hidden=true;document.body.style.overflow='';}
+const forestStories={
+ 25:{title:'A Fern Garden',image:'fern',story:'One morning, Moss noticed a little patch of green tucked beneath the older trees. He brushed away a few fallen leaves and discovered tiny fern fronds unfurling in the soft woodland light.',interaction:'Moss now visits this quiet corner when he needs a moment to rest. He likes watching each new frond uncurl, one small leaf at a time.',gift:'A peaceful place for new growth.',ending:'And you helped Moss find that!'},
+ 50:{title:'Mushrooms and Mossy Stones',image:'mushrooms',story:'After a gentle rain, Moss followed the earthy smell of the forest floor and found a circle of mushrooms nestled beside old, moss-covered stones.',interaction:'He carefully made a little path around them, leaving the mushrooms undisturbed. The stones became his favourite place to sit and listen to the forest.',gift:'A cozy gathering place full of quiet life.',ending:'And you helped Moss find that!'},
+ 75:{title:'Fireflies at Dusk',image:'fireflies',story:'As evening settled between the trees, tiny lights began to blink in the shadows. Moss had discovered a gathering of fireflies.',interaction:'He sits very still as they drift around him like little lanterns. Their gentle glow makes the forest feel magical after sunset.',gift:'A little starlight beneath the trees.',ending:'And you helped Moss find that!'},
+ 100:{title:'A Woodland Brook',image:'brook',story:'Moss heard a soft trickling sound beyond the ferns. Following it, he found a clear brook winding over smooth stones through the heart of the forest.',interaction:'He likes dipping his toes in the cool water and watching the ripples carry tiny leaves downstream.',gift:'A fresh, peaceful stream through the forest.',ending:'And you helped Moss find that!'},
+ 125:{title:'The Grove Sanctuary',image:'grove',story:'At the edge of the forest, Moss discovered an ancient tree with broad branches and roots that curled into a natural shelter.',interaction:'It became a safe haven for the small creatures of the woodland. Moss rests beneath its canopy, knowing the forest has become a home for many.',gift:'A sheltering place where the whole forest belongs.',ending:'And you helped Moss find that!'}
+};
+function openForestStory(at){
+ const item=forestStories[at],points=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
+ if(!item||points<at)return;
+ $('forestStoryImage').src=`./forest-${item.image}.jpg`;
+ $('forestStoryImage').alt=item.title;
+ $('forestStoryTitle').textContent=item.title;
+ $('forestStoryText').textContent=item.story;
+ $('forestStoryInteraction').textContent=item.interaction;
+ $('forestStoryGift').textContent=item.gift;
+ $('forestStoryEnding').textContent=item.ending;
+ const storyModal=$('forestStoryModal');storyModal.hidden=false;storyModal.removeAttribute('hidden');storyModal.style.removeProperty('display');storyModal.style.removeProperty('visibility');storyModal.setAttribute('aria-hidden','false');
+}
+// Breathing is controlled by a standalone controller at the end of the document.
+let forestBreathTimer=null,forestBreathPhase=0,forestBreathRunning=false;
+function startForestBreathing(){}
+function pauseForestBreathing(){}
+function openForestBreathing(){}
+function closeForestBreathing(){}
+function closeForestStory(){
+ const m=document.getElementById('forestStoryModal');
+ if(!m)return;
+ m.setAttribute('aria-hidden','true');
+ m.setAttribute('hidden','');
+ m.hidden=true;
+ m.style.setProperty('display','none','important');
+ m.style.setProperty('visibility','hidden','important');
+}
+function openForestReview(){
+ const modal=$('forestReviewModal'),gallery=$('forestGallery');if(!modal||!gallery)return;
+ const evo=mossEvolution(),points=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
+ const next=evo.forestMilestones.find(item=>points<item.at);
+ $('forestReviewProgress').textContent=`${evo.unlocked.length} of ${evo.forestMilestones.length} discoveries awakened · ${points} lifetime growth points`;
+ const descriptions={25:'A quiet patch of ferns where Moss can rest and plan the next little step.',50:'A growing circle of mushrooms and soft, ancient stones.',75:'Tiny fireflies begin to dance between the trees at dusk.',100:'A clear, singing brook winds through the forest.',125:'A sheltering old tree offers a home to the small things of the woodland.'};
+ const art={25:'fern',50:'mushrooms',75:'fireflies',100:'brook',125:'grove'};
+ gallery.innerHTML=evo.forestMilestones.map(item=>{
+  const isOpen=points>=item.at;
+  const title=isOpen?item.label:'A hidden part of the forest';
+  return `<article class="forest-discovery-card ${isOpen?'awakened':'waiting'}"><div class="forest-discovery-art"><img src="./forest-${isOpen?art[item.at]:'grove'}.jpg" alt=""></div><div class="forest-discovery-detail"><button type="button" class="forest-story-link" data-forest-story="${item.at}" ${isOpen?'':'disabled'}>${title}</button><p>${isOpen?descriptions[item.at]:'This place is waiting to join Moss’s home.'}</p><small>${isOpen?'✦ Discovered · '+item.at+' growth points':'Unlock at '+item.at+' lifetime growth points'}</small></div><span class="forest-discovery-status">${isOpen?'✓':'· · ·'}</span></article>`;
+ }).join('');
+ $('forestNextNote').textContent=next?`${next.at-points} points until ${next.label}`:'Every discovery has found its place. The forest is yours.';
+ const bar=$('forestWorldBar');if(bar)bar.style.width=(evo.unlocked.length/evo.forestMilestones.length*100)+'%';
+ // Present the forest as a normal app view, not a fixed overlay.
+ document.body.classList.add('forest-page-open');
+ modal.hidden=false;
+ modal.setAttribute('aria-hidden','false');
+ window.scrollTo(0,0);
+}
+function closeForestReview(){
+ const m=$('forestReviewModal');
+ if(m){m.hidden=true;m.setAttribute('aria-hidden','true');}
+ document.body.classList.remove('forest-page-open');
+ document.body.style.overflow='';
+ window.scrollTo(0,0);
+}
 function renderFamiliar(message){
  const stage=familiarStage(),stages=[
   {name:'Sprout stage',emoji:'🌱',next:5,desc:'Moss is just getting to know you. Little steps help the forest grow.'},
@@ -943,7 +1363,7 @@ function renderFamiliar(message){
    forest.hidden=false;
    const unlocked=evolution.unlocked.map(item=>`<span class="forest-unlock" title="${item.label}">${item.icon} ${item.label}</span>`).join('');
    const next=evolution.nextForestAt?`<span class="forest-next">${evolution.nextForestAt-friend.points} points until the next forest discovery</span>`:'<span class="forest-next">The woodland is flourishing. Every step still counts.</span>';
-   forest.innerHTML=`<strong>🌲 The Living Forest</strong><div class="forest-unlocks">${unlocked||'<span class="forest-next">Your first forest discovery is waiting.</span>'}</div>${next}<div class="forest-lifetime">${friend.points} lifetime growth points · Moss’s evolution is permanent</div>`;
+   forest.innerHTML=`<strong>🌲 The Living Forest</strong><div class="forest-unlocks">${unlocked||'<span class="forest-next">Your first forest discovery is waiting.</span>'}</div>${next}<div class="forest-lifetime">${friend.points} lifetime growth points · Moss’s evolution is permanent</div><button type="button" id="livingForestExplore" class="secondary" style="display:block;width:100%;margin:10px 0 2px;font-weight:700">🌲 Visit the Living Forest</button>`;
   }
  }
 }
@@ -995,10 +1415,31 @@ function setMossBreathing(active){
  if(active){familiarBreathing=true;c.classList.add('curling');setTimeout(()=>{if(familiarBreathing)c.classList.add('breathing')},650);renderFamiliar('Moss curls up beside you and breathes with the prompts: in for 4, pause for 2, out for 6.')}
  else{stopMossBreathing();renderFamiliar('Moss is rested and ready whenever you are.')}
 }
+// On first launch of this feature, silently register discoveries the user had
+// already earned. This prevents an old milestone from being misrepresented as new.
+try{
+ if(!localStorage.getItem('trytodo.forest.initialized.v1')){
+  const current=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
+  saveForestSeen(mossEvolution().forestMilestones.filter(item=>current>=item.at).map(item=>item.at));
+  localStorage.setItem('trytodo.forest.initialized.v1','1');
+ }
+}catch(e){}
+function checkForestUnlock(before,after){
+ const seen=forestSeen();
+ const newlyUnlocked=mossEvolution().forestMilestones.filter(item=>before<item.at&&after>=item.at&&!seen.includes(item.at));
+ if(newlyUnlocked.length){
+  const item=newlyUnlocked[0];
+  saveForestSeen([...seen,...newlyUnlocked.map(x=>x.at)]);
+  setTimeout(()=>showForestDiscovery(item),350);
+ }
+}
 function rewardFamiliar(t,amount=1){
  t.rewarded=t.rewarded||false;
  if(t.rewarded)return false;
+ const before=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
  t.rewarded=true;friend.points+=amount;saveFamiliar();reactToTask(t,true);
+ const after=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
+ checkForestUnlock(before,after);
  return true;
 }
 try{let d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&Array.isArray(d.tasks)){data={tasks:d.tasks.filter(t=>t&&typeof t==='object'&&typeof t.name==='string').map(t=>({...t,id:String(t.id||('task-'+Math.random().toString(36).slice(2))),energy:['Low','Medium','High'].includes(t.energy)?t.energy:'Medium',kind:['Mindless','Middle','Fully involved'].includes(t.kind)?t.kind:'Middle',progress:Math.max(0,Math.min(100,Number(t.progress)||0)),done:!!t.done,until:Number(t.until)||0})),skip:Array.isArray(d.skip)?d.skip:[]}}}catch(e){}
@@ -1008,7 +1449,7 @@ function render(){let f=$('filter').value,arr=data.tasks.filter(t=>!t.until||t.u
 function addTask(name,energy,kind,category='home'){data.tasks.unshift({id:'task-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),name,energy,kind,category,progress:0,done:false,until:0});save();render()}
 $('form').onsubmit=e=>{e.preventDefault();let n=$('name').value.trim();if(!n)return;addTask(n,$('energy').value,$('kind').value,selectedCommonCategory);$('name').value='';commonTaskSelect.value='';selectedCommonCategory='home';/* Keep the keyboard closed after adding a task. */};
 $('filter').onchange=render;
-$('tasks').onchange=e=>{const el=e.target,a=el.dataset.a;if(!a)return;const t=data.tasks.find(item=>item.id===el.dataset.id);if(!t)return;let completedNow=false;if(a==='done'){const wasDone=!!t.done;t.done=!!el.checked;t.progress=t.done?100:Math.min(Number(t.progress)||0,90);completedNow=t.done&&!wasDone;if(completedNow){t.completedAt=Date.now();save();rewardFamiliar(t,1)}else if(!t.done){delete t.completedAt;save();reactToTask(t,false)}}else if(a==='progress'){const previous=Number(t.progress)||0;t.progress=Math.max(0,Math.min(100,Number(el.value)||0));t.done=t.progress===100;completedNow=t.done&&!t.completedAt;if(completedNow){t.completedAt=Date.now();save();rewardFamiliar(t,1)}else{if(!t.done)delete t.completedAt;save();if(t.progress>=50&&previous<50&&!t.partialRewarded&&!t.done){t.partialRewarded=true;friend.points+=0.5;saveFamiliar();reactToTask(t,false)}else if(!t.done)reactToTask(t,false)}}save();render()};
+$('tasks').onchange=e=>{const el=e.target,a=el.dataset.a;if(!a)return;const t=data.tasks.find(item=>item.id===el.dataset.id);if(!t)return;let completedNow=false;if(a==='done'){const wasDone=!!t.done;t.done=!!el.checked;t.progress=t.done?100:Math.min(Number(t.progress)||0,90);completedNow=t.done&&!wasDone;if(completedNow){t.completedAt=Date.now();save();rewardFamiliar(t,1)}else if(!t.done){delete t.completedAt;save();reactToTask(t,false)}}else if(a==='progress'){const previous=Number(t.progress)||0;t.progress=Math.max(0,Math.min(100,Number(el.value)||0));t.done=t.progress===100;completedNow=t.done&&!t.completedAt;if(completedNow){t.completedAt=Date.now();save();rewardFamiliar(t,1)}else{if(!t.done)delete t.completedAt;save();if(t.progress>=50&&previous<50&&!t.partialRewarded&&!t.done){const beforeGrowth=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);t.partialRewarded=true;friend.points+=0.5;saveFamiliar();checkForestUnlock(beforeGrowth,Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0));reactToTask(t,false)}else if(!t.done)reactToTask(t,false)}}save();render()};
 $('tasks').onclick=e=>{let b=e.target.closest('button[data-a]');if(!b)return;let t=data.tasks.find(t=>t.id===b.dataset.id);if(!t)return;switch(b.dataset.a){case'start':if(activeMossTask===t.id){activeMossTask=null;taskScene(t,'resting');renderFamiliar(prefs.alwaysWorkAlongsideMoss?'Moss is still here, quietly keeping you company.':'Moss is taking a little breather. You can pause whenever you need.')}else{activeMossTask=t.id;taskScene(t,prefs.alwaysWorkAlongsideMoss?'working':'determined');reactToTask(t,false);renderFamiliar('Moss is ready to work alongside you. No rush — every little bit counts.')}break;case's15':t.until=Date.now()+15*864e5;break;case's30':t.until=Date.now()+30*864e5;break;case'skip':if(!data.skip.includes(t.id))data.skip.push(t.id);break;
 case'edit':{
  const name=prompt('Task name',t.name);if(name===null)break;
@@ -1125,7 +1566,47 @@ $('export').onclick=()=>{let a=document.createElement('a'),u=URL.createObjectURL
 $('import').onclick=()=>$('file').click();$('file').onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text());if(!Array.isArray(d.tasks)||!Array.isArray(d.skip)||!d.tasks.every(t=>t&&typeof t==='object'&&typeof t.name==='string'))throw 0;if(data.tasks.length&&!confirm('Importing will replace the tasks currently saved in this browser. Continue?')){e.target.value='';return}data={tasks:d.tasks,skip:d.skip};if(d.friend&&typeof d.friend==='object'){const importedPoints=Math.max(0,Number(d.friend.lifetimePoints)||0,Number(d.friend.points)||0);friend.lifetimePoints=Math.max(Number(friend.lifetimePoints)||0,importedPoints);friend.points=friend.lifetimePoints;friend.enabled=d.friend.enabled!==false;saveFamiliar()}save();render();renderFamiliar();alert('Backup imported.')}catch(e){alert('That does not look like a valid backup file.')}e.target.value=''};
 $('mossMotionToggle').onchange=e=>{mossMotion=e.target.checked;if(!mossMotion){$('familiarArt').classList.remove('is-working');$('sceneHelper').style.animation='none';$('sceneProp').style.animation='none'}else{$('sceneHelper').style.animation='';$('sceneProp').style.animation='';if(activeMossTask)taskScene(data.tasks.find(t=>t.id===activeMossTask),'working')}};
 $('familiarToggle').onclick=()=>{friend.enabled=!friend.enabled;saveFamiliar();if(!friend.enabled)stopMossBreathing();renderFamiliar(friend.enabled?'Moss is glad to be back!':'');if(friend.enabled){const c=$('familiarCreature');c.classList.remove('happy');void c.offsetWidth;c.classList.add('happy')}};
-// Moss evolution is permanent; there is intentionally no reset action.
+// Intentional reset lives in general Preferences, away from everyday Moss controls.
+// It is explicit and confirmed; tasks and other preferences remain untouched.
+$('reviewForest').addEventListener('click',openForestReview);
+// The modal markup is placed after the app scripts. Use delegated events so
+// controls added later in document parsing always receive their handlers.
+document.addEventListener('click',e=>{
+ const target=e.target.closest('button,[role="dialog"]');
+ if(!target)return;
+ if(target.id==='livingForestExplore'){openForestReview();return;}
+ if(target.id==='forestBreatheOpen'){openForestBreathing();return;}
+ if(target.id==='forestBreathingClose'){closeForestBreathing();return;}
+ if(target.id==='forestBreathingStart'){startForestBreathing();return;}
+ if(target.id==='forestBreathingStop'){pauseForestBreathing();return;}
+ if(target.id==='forestReviewClose'){closeForestReview();return;}
+ if(target.id==='forestStoryClose'||target.id==='forestStoryDone'){closeForestStory();return;}
+ if(target.dataset&&target.dataset.forestStory){openForestStory(Number(target.dataset.forestStory));return;}
+ if(target.id==='forestStoryModal'&&e.target===target){closeForestStory();return;}
+ if(target.id==='forestDiscoveryClose'){closeForestDiscovery();return;}
+ if(target.id==='forestExplore'){closeForestDiscovery();openForestReview();return;}
+ if(target.id==='forestReviewModal'&&e.target===target){closeForestReview();return;}
+ if(target.id==='forestDiscoveryModal'&&e.target===target){closeForestDiscovery();return;}
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){
+  if(!$('forestBreathingModal').hidden){closeForestBreathing();return;}
+  if(!$('forestStoryModal').hidden){closeForestStory();return;}
+  if(!$('forestReviewModal').hidden)closeForestReview();
+  if(!$('forestDiscoveryModal').hidden)closeForestDiscovery();
+ }
+});
+$('resetMoss').addEventListener('click',()=>{
+ if(!confirm('Reset Moss to Sproutling? This will permanently clear his evolution, lifetime growth points, and Living Forest discoveries. Your tasks and preferences will stay as they are. This cannot be undone.'))return;
+ friend.points=0;
+ friend.lifetimePoints=0;
+ // Write directly: saveFamiliar() normally protects progress from accidental decreases.
+ try{localStorage.setItem(FAMILIAR_STORE,JSON.stringify(friend));localStorage.removeItem(FOREST_SEEN_STORE);}catch(e){}
+ const img=$('mossEvolutionImage');
+ if(img){img.dataset.form='';img.src=MOSS_FORM_IMAGES[0];img.alt='Moss in his small Sprout form';}
+ renderFamiliar('A fresh little beginning. Moss is ready to grow alongside you again.');
+ $('resetMossStatus').textContent='Moss has returned to Sproutling. Your tasks are safe.';
+});
 function triggerMossReaction(kind){
  const art=$('familiarArt'),img=$('mossEvolutionImage');
  if(!art||!img||!$('mossMotionToggle').checked)return;
@@ -1241,21 +1722,12 @@ render();renderFamiliar();paint();
 })();
 </script>
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./service-worker.js").catch(function (error) {
-      console.warn("PWA offline support could not be registered:", error);
-    });
-  });
-}
-</script>
 
 
 <div id="pwaInstallHelp" class="pwa-help-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="pwaHelpTitle">
  <div class="pwa-help-card">
   <button type="button" class="pwa-help-close" id="pwaHelpClose" aria-label="Close">×</button>
-  <img class="pwa-help-moss" src="./icons/icon-192.png" alt="Moss" />
+  <img class="pwa-help-moss" src="./icons/moss-home-icon-v3.png" alt="Moss" />
   <h2 id="pwaHelpTitle">Add Try To Do List to your phone</h2>
   <div id="pwaHelpAndroid" hidden><p>Your browser can install this app. Choose <strong>Install</strong> when the prompt appears.</p><p>If you don't see a prompt, open your browser menu <strong>⋮</strong> and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p></div>
   <div id="pwaHelpIOS" hidden><ol><li>Open this page in <strong>Safari</strong>.</li><li>Tap the <strong>Share</strong> button <span aria-hidden="true">□↑</span>.</li><li>Scroll down and tap <strong>Add to Home Screen</strong>.</li><li>Tap <strong>Add</strong> in the top corner.</li></ol><p>Moss will then appear on your Home Screen.</p></div>
@@ -1293,9 +1765,233 @@ if ("serviceWorker" in navigator) {
   help.addEventListener('click',function(e){if(e.target===help)closeHelp();});
   if(isIOS||isAndroid) btn.hidden=false;
   hideIfInstalled();
-  if('serviceWorker' in navigator && location.protocol==='https:'){
-    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js').catch(function(){});});
-  }
 })();
 </script>
-</body></html>
+
+<div id="forestDiscoveryModal" class="forest-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestDiscoveryTitle">
+ <div class="forest-modal-card"><div class="forest-modal-art" id="forestDiscoveryArt">🌿</div><div class="tag">Living Forest discovery</div><h2 id="forestDiscoveryTitle">A New Discovery!</h2><p class="forest-modal-copy" id="forestDiscoveryDescription"></p><p class="forest-modal-copy" id="forestDiscoveryMilestone"></p><div class="forest-modal-actions"><button id="forestExplore" type="button">Explore the Living Forest</button><button id="forestDiscoveryClose" class="secondary" type="button">Lovely</button></div></div>
+</div>
+<div id="forestReviewModal" class="forest-modal forest-world-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
+ <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><button type="button" id="forestBreatheHero" class="forest-sanctuary-breathe">☾ Breathe with Moss</button><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
+ <div class="forest-world-progress"><div><strong>🌲 Your discoveries</strong><span id="forestReviewProgress"></span></div><div class="forest-world-bar"><span id="forestWorldBar"></span></div><p id="forestNextNote"></p></div>
+ <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">⌂ Return to Main</button></div></div>
+ <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
+  <article class="forest-story-card">
+   <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story" onclick="closeForestStory();return false;">×</button>
+   <img id="forestStoryImage" class="forest-story-image" src="./forest-fern.jpg" alt="">
+   <div class="forest-story-copy"><p class="forest-story-kicker">A LIVING FOREST STORY</p><h2 id="forestStoryTitle"></h2>
+    <p id="forestStoryText"></p><h3>Moss’s little part in the story</h3><p id="forestStoryInteraction"></p>
+    <div class="forest-story-gift" id="forestStoryGift"></div><p class="forest-story-ending" id="forestStoryEnding"></p>
+    <button type="button" id="forestStoryDone" class="forest-story-done" onclick="closeForestStory();return false;">Return to the forest</button>
+   </div>
+  </article>
+ </div>
+
+ </div>
+</div>
+ <div id="forestBreathingModal" class="forest-modal forest-story-modal forest-breathing-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestBreathingTitle">
+  <article class="forest-breathing-card">
+   <button type="button" class="forest-story-x" id="forestBreathingClose" aria-label="Close breathing break">×</button>
+   <div class="forest-breathing-scene">
+    <img src="./moss-breathing-scene-v1.jpg" alt="Moss resting peacefully with his eyes closed">
+    <div class="forest-chest-glow" id="forestChestGlow" aria-hidden="true"></div>
+    <div class="forest-breath-orb" id="forestBreathOrb" aria-hidden="true"></div>
+   </div>
+   <div class="forest-breathing-copy">
+    <p class="forest-story-kicker">A QUIET MOMENT IN THE WOODS</p>
+    <h2 id="forestBreathingTitle">Breathe with Moss</h2>
+    <p id="forestBreathingCue" aria-live="polite">When you're ready, begin. There's nowhere else you need to be.</p>
+    <div class="forest-breathing-options"><label for="forestBreathingPattern">Breathing rhythm</label><select id="forestBreathingPattern"><option value="gentle">Gentle · 4–2–6</option><option value="slow">Slow · 4–4–8</option><option value="natural">Natural breathing</option></select></div>
+     <div class="forest-breathing-controls"><button type="button" id="forestBreathingStart">Begin breathing</button><button type="button" class="secondary" id="forestBreathingStop">Pause</button></div>
+    <p class="forest-breathing-note" id="forestBreathingNote">A gentle rhythm: breathe in, pause, and slowly breathe out. Follow your own comfortable pace.</p>
+    <p class="forest-story-ending">The forest will be here when you return. Take your time.</p><button type="button" class="secondary" id="forestBreathingReturn">Return to Main</button>
+   </div>
+  </article>
+</div>
+
+
+<style>
+.forest-breathing-modal{position:fixed;inset:0;z-index:10030;border-radius:0}
+#appUpdateNotice{position:fixed;z-index:10060;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);bottom:auto;max-width:560px;margin:0 auto;padding:16px 18px;background:linear-gradient(135deg,#294d35,#172f23);color:#fffdf2;border:2px solid #d4bd78;border-radius:18px;box-shadow:0 10px 34px rgba(0,0,0,.38);display:flex;align-items:center;gap:14px;font:inherit}
+#appUpdateNotice[hidden]{display:none}
+#appUpdateNotice .update-copy{flex:1;font-size:15px;line-height:1.4}
+#appUpdateNotice .update-copy strong{font-size:16px;display:inline-block;margin-bottom:2px}
+#appUpdateNotice button{border:0;border-radius:999px;padding:12px 16px;background:#f2e6bd;color:#203b2d;font-weight:800;white-space:nowrap;box-shadow:0 2px 0 #b9a56e}
+@media(max-width:420px){#appUpdateNotice{left:8px;right:8px;padding:13px 12px;gap:9px}#appUpdateNotice .update-copy{font-size:13px}#appUpdateNotice .update-copy strong{font-size:14px}#appUpdateNotice button{padding:11px 12px;font-size:13px}}
+</style>
+<div id="appUpdateNotice" role="status" aria-live="polite" hidden><div class="update-copy"><strong>Moss has something new!</strong><br>A fresh version is ready.</div><button id="appUpdateNow" type="button">Update now</button></div>
+<script>
+(function(){
+  if(!('serviceWorker' in navigator) || location.protocol!=='https:') return;
+  var notice=document.getElementById('appUpdateNotice');
+  var updateButton=document.getElementById('appUpdateNow');
+  var refreshing=false;
+  var waitingWorker=null;
+  function showUpdate(worker){waitingWorker=worker;notice.hidden=false;}
+  function checkWaiting(reg){if(reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);}
+  updateButton.addEventListener('click',function(){
+    if(!waitingWorker) return;
+    updateButton.disabled=true;updateButton.textContent='Updating…';
+    waitingWorker.postMessage({type:'SKIP_WAITING'});
+  });
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    if(refreshing) return;refreshing=true;window.location.reload();
+  });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(function(reg){
+      checkWaiting(reg);
+      reg.addEventListener('updatefound',function(){
+        var installing=reg.installing;if(!installing) return;
+        installing.addEventListener('statechange',function(){
+          if(installing.state==='installed' && navigator.serviceWorker.controller) checkWaiting(reg);
+        });
+      });
+      reg.update().catch(function(){});
+      document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState==='visible') reg.update().catch(function(){});
+      });
+    }).catch(function(error){console.warn('PWA update check could not be registered:',error);});
+  });
+})();
+</script>
+
+
+<script>
+// Story cards are independent of the forest modal. Bind controls directly
+// and force-hide the overlay rather than relying on delegated app clicks.
+(function(){
+  var story=document.getElementById('forestStoryModal');
+  if(story && story.parentElement !== document.body) document.body.appendChild(story);
+  function dismiss(e){
+    if(e){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();}
+    var modal=document.getElementById('forestStoryModal');
+    if(!modal)return false;
+    modal.setAttribute('aria-hidden','true');
+    modal.setAttribute('hidden','');
+    modal.hidden=true;
+    modal.style.setProperty('display','none','important');
+    modal.style.setProperty('visibility','hidden','important');
+    return false;
+  }
+  ['forestStoryClose','forestStoryDone'].forEach(function(id){
+    var button=document.getElementById(id);
+    if(!button)return;
+    button.onclick=dismiss;
+    button.addEventListener('click',dismiss,true);
+    button.addEventListener('pointerup',dismiss,true);
+    button.addEventListener('touchend',dismiss,{capture:true,passive:false});
+  });
+  if(story) story.addEventListener('click',function(e){
+    if(e.target===story)dismiss(e);
+  },true);
+})();
+</script>
+<style>
+/* The story is a true viewport-level layer, not a fragile nested panel. */
+#forestStoryModal{position:fixed!important;inset:0!important;z-index:10040!important;border-radius:0!important;overflow:auto!important}
+#forestStoryModal .forest-story-card{position:relative;margin:auto}
+#forestStoryModal[hidden]{display:none!important}
+</style>
+
+<style>
+/* Standalone Moss breathing experience */
+#forestBreathingModal{position:fixed!important;inset:0!important;z-index:10080!important;display:flex;align-items:center;justify-content:center;overflow:auto;background:rgba(10,25,15,.94);padding:calc(env(safe-area-inset-top,12px) + 8px) 12px calc(env(safe-area-inset-bottom,12px) + 8px)}
+#forestBreathingModal[hidden]{display:none!important}
+#forestBreathingModal .forest-breathing-card{position:relative;width:min(760px,100%);max-height:100%;overflow:auto;margin:auto;border:3px solid #c8b66d;border-radius:24px;background:#f5efd9;box-shadow:0 18px 55px #0009}
+#forestBreathingModal .forest-breathing-scene{position:relative;overflow:hidden;background:#193323}
+#forestBreathingModal .forest-breathing-scene img{display:block;width:100%;height:auto;max-height:48vh;object-fit:cover}
+#forestBreathingModal .forest-chest-glow{position:absolute;left:51%;top:64%;width:22%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(.78);background:radial-gradient(circle,rgba(255,226,115,.64),rgba(255,211,83,.22) 48%,transparent 72%);opacity:.45;pointer-events:none;transition:transform 4s ease-in-out,opacity 4s ease-in-out}
+#forestBreathOrb{position:absolute;right:8%;top:16%;width:clamp(76px,17vw,132px);aspect-ratio:1;border:3px solid #e4d18b;border-radius:50%;background:rgba(25,55,32,.78);box-shadow:0 0 22px #f3dc83aa;transform:scale(.86);transition:transform 4s ease-in-out,box-shadow 4s ease-in-out}
+#forestBreathOrb.inhale{transform:scale(1.12);box-shadow:0 0 38px #f5df8b}
+#forestBreathOrb.pause{transform:scale(1.12);transition-duration:2s}
+#forestBreathOrb.exhale{transform:scale(.86);transition-duration:6s}
+#forestChestGlow.inhale{transform:translate(-50%,-50%) scale(1.14);opacity:.95;transition-duration:4s}
+#forestChestGlow.pause{transform:translate(-50%,-50%) scale(1.14);opacity:.85;transition-duration:2s}
+#forestChestGlow.exhale{transform:translate(-50%,-50%) scale(.78);opacity:.38;transition-duration:6s}
+#forestBreathingCue{font-size:1.2rem;font-weight:700;color:#314c35;text-align:center}
+#forestBreathingControls,#forestBreathingOptions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:8px 12px}
+#forestBreathingModal .forest-breathing-copy{padding:16px 20px 22px}
+#forestBreathingModal .forest-story-x{z-index:2}
+@media(max-width:520px){#forestBreathingModal .forest-breathing-scene img{max-height:42vh}#forestBreathingModal .forest-breathing-copy{padding:12px}#forestBreathingModal .forest-breathing-card{border-radius:18px}}
+</style>
+<script>
+/* Fully independent breathing controller: does not depend on the main app's $ helper or event delegation. */
+(function(){
+  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn,{once:true}); else fn(); }
+  ready(function(){
+    const byId=id=>document.getElementById(id);
+    const hero=byId('forestBreatheHero'), modal=byId('forestBreathingModal');
+    const close=byId('forestBreathingClose'), start=byId('forestBreathingStart'), pause=byId('forestBreathingStop');
+    const cue=byId('forestBreathingCue'), orb=byId('forestBreathOrb'), chest=byId('forestChestGlow');
+    const forest=byId('forestReviewModal'), returnMain=byId('forestBreathingReturn'), forestClose=byId('forestReviewClose');
+    if(!hero||!modal||!close||!start||!pause||!cue||!orb||!chest) return;
+    let timer=null, phase=0, running=false, mode='gentle', remaining=0;
+    const patterns={
+      gentle:[{label:'Breathe in gently',seconds:4,cls:'inhale'},{label:'Rest softly',seconds:2,cls:'pause'},{label:'Breathe out slowly',seconds:6,cls:'exhale'}],
+      slow:[{label:'Breathe in gently',seconds:4,cls:'inhale'},{label:'Rest softly',seconds:4,cls:'pause'},{label:'Breathe out slowly',seconds:8,cls:'exhale'}]
+    };
+    function paint(){
+      orb.className='forest-breath-orb'; chest.className='forest-chest-glow';
+      if(mode==='natural'){cue.textContent='Breathe naturally, at your own comfortable pace.';return;}
+      const step=patterns[mode][phase];
+      cue.textContent=step.label+' · '+remaining+' seconds';
+      orb.classList.add(step.cls); chest.classList.add(step.cls);
+    }
+    function stopTimer(){if(timer){clearInterval(timer);timer=null;}running=false;}
+    function tick(){
+      remaining--;
+      if(remaining<=0){phase=(phase+1)%patterns[mode].length;remaining=patterns[mode][phase].seconds;}
+      paint();
+    }
+    function begin(){
+      if(running)return;
+      if(mode==='natural'){running=true;start.textContent='Pause natural breathing';cue.textContent='Follow your own comfortable breathing. No counting.';return;}
+      running=true;start.textContent='Breathing…';paint();
+      timer=setInterval(tick,1000);
+    }
+    function pauseBreath(){
+      stopTimer();start.textContent='Continue breathing';
+      orb.className='forest-breath-orb';chest.className='forest-chest-glow';
+      cue.textContent='Paused. Return to your natural breathing whenever you like.';
+    }
+    function open(){
+      stopTimer();phase=0;mode='gentle';remaining=4;
+      const selector=byId('forestBreathingPattern');if(selector)selector.value='gentle';
+      start.textContent='Begin breathing';cue.textContent='When you are ready, begin. There is nowhere else you need to be.';
+      modal.hidden=false;modal.style.display='flex';
+    }
+    function shut(){
+      pauseBreath();modal.hidden=true;modal.style.display='none';
+      if(forest && !forest.hidden) forest.focus?.();
+    }
+    if(returnMain) returnMain.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();if(forest)forest.hidden=true;},true);
+    if(forestClose) forestClose.textContent='Return to Main';
+    hero.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();open();},true);
+    close.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();shut();},true);
+    start.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();if(mode==='natural'&&running){pauseBreath();start.textContent='Begin natural breathing';}else begin();},true);
+    pause.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();pauseBreath();},true);
+    const selector=byId('forestBreathingPattern');
+    if(selector) selector.addEventListener('change',function(){
+      pauseBreath();mode=selector.value==='slow'?'slow':selector.value==='natural'?'natural':'gentle';
+      phase=0;remaining=mode==='slow'?4:4;start.textContent='Begin breathing';
+      cue.textContent=mode==='natural'?'Breathe naturally, at your own comfortable pace.':'When you are ready, begin.';
+      orb.className='forest-breath-orb';chest.className='forest-chest-glow';
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)shut();});
+    window.openForestBreathing=open;window.closeForestBreathing=shut;
+    modal.hidden=true;modal.style.display='none';
+  });
+})();
+</script>
+\n</body></html>
+
+<style>
+.forest-breathing-modal{position:fixed!important;inset:0!important;z-index:10080!important;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(14,29,17,.88)!important}
+.forest-breathing-modal[hidden]{display:none!important}.forest-breathing-scene{isolation:isolate}.forest-breathing-scene img{transform-origin:50% 72%}
+.forest-breathing-scene.is-breathing img{animation:moss-body-breath 12s ease-in-out infinite}
+.forest-breathing-scene:before{content:"";position:absolute;z-index:2;left:50%;top:62%;width:86px;height:58px;transform:translate(-50%,-50%) scale(.72);border-radius:50%;background:radial-gradient(ellipse,rgba(255,226,132,.65),rgba(255,226,132,0) 72%);opacity:0;pointer-events:none}
+.forest-breathing-scene.is-breathing:before{animation:moss-chest-glow 12s ease-in-out infinite}
+@keyframes moss-body-breath{0%,50%,100%{transform:scale(1)}16.6%,25%{transform:scale(1.025,1.045)}}
+@keyframes moss-chest-glow{0%{opacity:.15;transform:translate(-50%,-50%) scale(.72)}33.3%,50%{opacity:.85;transform:translate(-50%,-50%) scale(1.25)}100%{opacity:.15;transform:translate(-50%,-50%) scale(.72)}}
+@media(prefers-reduced-motion:reduce){.forest-breathing-scene.is-breathing img,.forest-breathing-scene.is-breathing:before{animation:none!important}}
+</style>
