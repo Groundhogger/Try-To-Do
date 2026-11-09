@@ -1023,7 +1023,7 @@ function openForestStory(at){
  $('forestStoryInteraction').textContent=item.interaction;
  $('forestStoryGift').textContent=item.gift;
  $('forestStoryEnding').textContent=item.ending;
- $('forestStoryModal').hidden=false;
+ const storyModal=$('forestStoryModal');storyModal.hidden=false;storyModal.removeAttribute('hidden');storyModal.style.removeProperty('display');storyModal.style.removeProperty('visibility');storyModal.setAttribute('aria-hidden','false');
 }
 // Breathing is controlled by a standalone controller at the end of the document.
 let forestBreathTimer=null,forestBreathPhase=0,forestBreathRunning=false;
@@ -1031,7 +1031,15 @@ function startForestBreathing(){}
 function pauseForestBreathing(){}
 function openForestBreathing(){}
 function closeForestBreathing(){}
-function closeForestStory(){const m=$('forestStoryModal');if(m)m.hidden=true;}
+function closeForestStory(){
+ const m=document.getElementById('forestStoryModal');
+ if(!m)return;
+ m.setAttribute('aria-hidden','true');
+ m.setAttribute('hidden','');
+ m.hidden=true;
+ m.style.setProperty('display','none','important');
+ m.style.setProperty('visibility','hidden','important');
+}
 function openForestReview(){
  const modal=$('forestReviewModal'),gallery=$('forestGallery');if(!modal||!gallery)return;
  const evo=mossEvolution(),points=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
@@ -1501,12 +1509,12 @@ render();renderFamiliar();paint();
  <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">⌂ Return to Main</button></div></div>
  <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
   <article class="forest-story-card">
-   <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story">×</button>
+   <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story" onclick="closeForestStory();return false;">×</button>
    <img id="forestStoryImage" class="forest-story-image" src="./forest-fern.jpg" alt="">
    <div class="forest-story-copy"><p class="forest-story-kicker">A LIVING FOREST STORY</p><h2 id="forestStoryTitle"></h2>
     <p id="forestStoryText"></p><h3>Moss’s little part in the story</h3><p id="forestStoryInteraction"></p>
     <div class="forest-story-gift" id="forestStoryGift"></div><p class="forest-story-ending" id="forestStoryEnding"></p>
-    <button type="button" id="forestStoryDone" class="forest-story-done">Return to the forest</button>
+    <button type="button" id="forestStoryDone" class="forest-story-done" onclick="closeForestStory();return false;">Return to the forest</button>
    </div>
   </article>
  </div>
@@ -1581,20 +1589,32 @@ render();renderFamiliar();paint();
 
 
 <script>
-// Make story cards independent of the forest modal, so their controls remain reachable.
+// Story cards are independent of the forest modal. Bind controls directly
+// and force-hide the overlay rather than relying on delegated app clicks.
 (function(){
   var story=document.getElementById('forestStoryModal');
   if(story && story.parentElement !== document.body) document.body.appendChild(story);
-  var close=document.getElementById('forestStoryClose');
-  var done=document.getElementById('forestStoryDone');
   function dismiss(e){
-    if(e){e.preventDefault();e.stopPropagation();}
-    closeForestStory();
+    if(e){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();}
+    var modal=document.getElementById('forestStoryModal');
+    if(!modal)return false;
+    modal.setAttribute('aria-hidden','true');
+    modal.setAttribute('hidden','');
+    modal.hidden=true;
+    modal.style.setProperty('display','none','important');
+    modal.style.setProperty('visibility','hidden','important');
+    return false;
   }
-  if(close) close.addEventListener('click',dismiss,true);
-  if(done) done.addEventListener('click',dismiss,true);
+  ['forestStoryClose','forestStoryDone'].forEach(function(id){
+    var button=document.getElementById(id);
+    if(!button)return;
+    button.onclick=dismiss;
+    button.addEventListener('click',dismiss,true);
+    button.addEventListener('pointerup',dismiss,true);
+    button.addEventListener('touchend',dismiss,{capture:true,passive:false});
+  });
   if(story) story.addEventListener('click',function(e){
-    if(e.target===story) dismiss(e);
+    if(e.target===story)dismiss(e);
   },true);
 })();
 </script>
