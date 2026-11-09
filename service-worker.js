@@ -1,4 +1,4 @@
-const CACHE_NAME = "try-to-do-list-pwa-v12";
+const CACHE_NAME = "try-to-do-list-pwa-v16";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -10,15 +10,25 @@ const APP_SHELL = [
   "./moss-form-2.webp",
   "./moss-form-3.webp",
   "./moss-form-4.webp",
-  "./moss-form-5.webp"
+  "./moss-form-5.webp",
+  "./living-forest-scene.jpg",
+  "./forest-brook.jpg",
+  "./forest-fern.jpg",
+  "./forest-fireflies.jpg",
+  "./forest-grove.jpg",
+  "./forest-mushrooms.jpg",
+  "./forest-stone-circle.jpg"
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) =>
-      cache.addAll(APP_SHELL).catch(() => Promise.resolve())
-    ).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(APP_SHELL).catch(() => Promise.resolve()))
   );
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
@@ -36,7 +46,7 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request).then((response) => {
+      fetch(request, { cache: "no-store" }).then((response) => {
         if (response && response.ok) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));

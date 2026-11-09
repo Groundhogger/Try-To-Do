@@ -614,7 +614,76 @@ footer{color:#66705d!important}
 .forest-gallery-icon{font-size:1.8rem;min-width:38px;text-align:center}
 .forest-gallery-item strong{display:block;color:#294331}
 .forest-gallery-item small{display:block;color:#66745d;margin-top:3px}
-</style></head>
+</style><style>
+#reviewForest{font-size:1rem}
+.forest-world-modal{padding:12px;align-items:flex-start}
+.forest-world-card{width:min(100%,900px);max-height:94vh;overflow:auto;border:2px solid #b6a16d;border-radius:24px;background:linear-gradient(160deg,#f8f2df,#e4ead7);color:#2e422f;box-shadow:0 24px 80px #07180dcc}
+.forest-world-hero{height:clamp(210px,34vw,330px);position:relative;overflow:hidden;border-radius:18px 18px 0 0;background:#243d2a}
+.forest-world-hero img{width:100%;height:100%;object-fit:cover;object-position:38% 48%;display:block;filter:brightness(.82)}
+.forest-world-heading{position:absolute;left:0;right:0;bottom:0;padding:24px 22px 16px;background:linear-gradient(transparent,rgba(14,34,21,.88));color:#fff4d5}
+.forest-world-heading h2{font-family:Georgia,serif;font-size:clamp(1.7rem,4vw,2.5rem);margin:0;text-shadow:0 2px 8px #172719}
+.forest-world-heading p{margin:4px 0 0;font-style:italic}
+.forest-world-progress{padding:16px 20px 10px;background:#f2ecd9;border-bottom:1px solid #d4c69f}
+.forest-world-progress>div:first-child{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.forest-world-progress span{color:#526449;font-size:.9rem}
+.forest-world-bar{height:9px;background:#d7d0b8;border-radius:99px;overflow:hidden;margin-top:9px}
+.forest-world-bar span{display:block;height:100%;background:linear-gradient(90deg,#668b48,#a2b96b);border-radius:99px;transition:width .5s}
+.forest-world-progress p{margin:7px 0 0;font-size:.86rem;color:#63724f}
+.forest-world-intro{padding:14px 20px 4px;font-family:Georgia,serif;font-style:italic;color:#526449}
+.forest-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr));gap:12px;padding:12px 18px}
+.forest-discovery-card{position:relative;display:grid;grid-template-columns:92px 1fr;gap:11px;align-items:center;min-height:112px;padding:9px;border-radius:16px;border:1px solid #c4b58b;background:linear-gradient(145deg,#fffdf3,#e9e4cf);box-shadow:0 3px 9px #344b2b18;overflow:hidden}
+.forest-discovery-card.awakened{border-color:#9ba96d;box-shadow:0 0 0 1px #d1d9a7,0 4px 12px #7b8e4a28}
+.forest-discovery-card.waiting{filter:saturate(.55);background:linear-gradient(145deg,#f1eddf,#d8d8c8)}
+.forest-discovery-art{height:92px;border-radius:12px;overflow:hidden;background:#60774d;box-shadow:inset 0 0 15px #1c331b55}.forest-discovery-art img{width:100%;height:100%;object-fit:cover;display:block}.forest-muted-art{filter:grayscale(1) brightness(.72)}
+
+.forest-discovery-detail strong{display:block;text-transform:capitalize;font-family:Georgia,serif;font-size:1rem;color:#344832}
+.forest-discovery-detail p{font-size:.82rem;line-height:1.35;margin:4px 0;color:#58654d}
+.forest-discovery-detail small{font-size:.73rem;color:#75805e}
+.forest-discovery-status{position:absolute;right:8px;top:5px;color:#5e7c3d;font-weight:bold}
+.forest-discovery-card.waiting .forest-discovery-status{color:#8a886e}
+.forest-world-card .forest-modal-actions{padding:0 18px 18px}
+@media(max-width:520px){.forest-world-modal{padding:5px}.forest-world-card{max-height:96vh;border-radius:17px}.forest-world-hero{height:220px}.forest-gallery{grid-template-columns:1fr;padding:10px}.forest-discovery-card{grid-template-columns:78px 1fr;min-height:96px}.forest-discovery-art{height:78px}}
+</style>
+
+<style>
+.forest-story-link{display:block;padding:0;border:0;background:none;text-align:left;color:#344832;font-family:Georgia,serif;font-size:1rem;font-weight:700;text-decoration:underline;text-decoration-color:#a6ad76;text-underline-offset:3px;cursor:pointer}
+.forest-story-link:hover{color:#718246}
+.forest-story-link:disabled{cursor:default;text-decoration:none;color:#737665}
+.forest-story-modal{position:absolute;inset:0;z-index:8;background:rgba(17,29,17,.72);display:flex;align-items:center;justify-content:center;padding:clamp(8px,3vw,26px);border-radius:inherit}
+.forest-story-card{position:relative;display:grid;grid-template-columns:minmax(220px,42%) 1fr;width:min(100%,760px);max-height:90%;overflow:auto;border:3px solid #c6a96c;border-radius:22px;background:linear-gradient(145deg,#fff8e7,#e9e4ce);box-shadow:0 18px 60px #07180dcc;color:#344832}
+.forest-story-image{width:100%;height:100%;min-height:390px;max-height:620px;object-fit:cover}
+.forest-story-copy{padding:clamp(18px,3vw,30px);align-self:center}
+.forest-story-kicker{font-size:.72rem;letter-spacing:.15em;font-weight:800;color:#8a7547;margin:0 0 8px}
+.forest-story-copy h2{font-family:Georgia,serif;font-size:clamp(1.55rem,3vw,2.1rem);line-height:1.12;margin:0 30px 14px 0;color:#3b4b2f}
+.forest-story-copy p{font-family:Georgia,serif;font-size:1rem;line-height:1.55;color:#4d5842}
+.forest-story-copy h3{font-family:Georgia,serif;font-size:1.08rem;margin:20px 0 4px;color:#667642}
+.forest-story-gift{margin:18px 0 10px;padding:12px 14px;border-left:4px solid #8a9b57;background:#e3e8d2;border-radius:0 12px 12px 0;font-weight:700;color:#52633c}
+.forest-story-ending{font-family:Georgia,serif!important;font-style:italic;font-weight:700;color:#6b783f!important;text-align:center;margin:18px 0}
+.forest-story-x{position:absolute;right:10px;top:10px;z-index:2;width:38px;height:38px;border:0;border-radius:50%;background:#fff8e7;color:#405038;font-size:1.7rem;cursor:pointer;box-shadow:0 2px 8px #0003}
+.forest-story-done{display:block;margin:12px auto 0;padding:11px 20px;border:1px solid #87965a;border-radius:30px;background:#536d3e;color:#fff8e7;font-weight:700;cursor:pointer}
+@media(max-width:620px){.forest-story-modal{padding:8px}.forest-story-card{display:block;width:100%;max-height:94%;border-radius:16px}.forest-story-image{height:190px;min-height:190px;max-height:190px}.forest-story-copy{padding:17px 18px 20px}.forest-story-copy p{font-size:.94rem}.forest-story-copy h2{font-size:1.55rem}}
+</style>
+
+
+<style>
+.forest-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.forest-breathing-card{position:relative;display:grid;grid-template-columns:minmax(200px,42%) 1fr;width:min(100%,700px);max-height:90%;overflow:auto;border:3px solid #c6a96c;border-radius:22px;background:linear-gradient(145deg,#fff8e7,#e9e4ce);box-shadow:0 18px 60px #07180dcc;color:#344832}
+.forest-breathing-scene{position:relative;min-height:350px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(#b7cba5,#5d7650)}
+.forest-breathing-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#253d2b55,transparent 65%)}
+.forest-breathing-scene img{position:relative;z-index:1;width:100%;height:100%;max-height:460px;object-fit:contain;filter:drop-shadow(0 12px 14px #1e321d55)}
+.forest-breath-orb{position:absolute;z-index:0;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,#f7eab7aa,#d9e9b655 60%,transparent 72%);transition:transform 4s ease-in-out,opacity 4s ease;opacity:.7}
+.forest-breath-orb.inhale{transform:scale(1.45);opacity:1}
+.forest-breath-orb.pause{transform:scale(1.45);opacity:.85;transition-duration:2s}
+.forest-breath-orb.exhale{transform:scale(.8);opacity:.55;transition-duration:6s}
+.forest-breathing-copy{padding:clamp(18px,3vw,30px);align-self:center}
+.forest-breathing-copy h2{font-family:Georgia,serif;font-size:clamp(1.6rem,3vw,2.1rem);color:#3b4b2f;margin:0 0 12px}
+.forest-breathing-copy p{font-family:Georgia,serif;line-height:1.55;color:#4d5842}
+.forest-breathing-controls{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.forest-breathing-note{font-size:.88rem;color:#66715b!important}
+@media(max-width:620px){.forest-breathing-card{display:block;width:100%;max-height:94%;border-radius:16px}.forest-breathing-scene{min-height:190px;height:190px}.forest-breathing-scene img{height:190px}.forest-breath-orb{width:130px;height:130px}.forest-breathing-copy{padding:17px 18px 20px}}
+</style>
+
+</head>
 <body>
 
 <div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
@@ -674,7 +743,7 @@ footer{color:#66705d!important}
 <div style="flex:1;min-width:0"><strong id="familiarName">Moss, your little forest friend</strong><p id="familiarMessage" class="muted" style="margin:4px 0">Every little bit counts. Moss is happy to be here with you.</p><div class="tag" id="familiarStage">Sprout stage</div><div class="growth-track" aria-label="Growth progress"><div class="growth-fill" id="growthFill"></div></div><div class="muted" id="growthText">0 growth points · 5 to the next stage</div><div id="livingForest" hidden aria-live="polite"></div></div>
 </div>
 </div>
-<details class="app-settings"><summary>⚙ Moss settings</summary><div class="friend-options"><button class="secondary" id="familiarToggle" type="button">Hide Moss</button><button class="secondary" id="familiarCelebrate" type="button">Say hello</button><button class="secondary" id="familiarMood" type="button">Check in with Moss</button><span class="muted">Moss’s growth is permanent and cannot be reset from here.</span><button class="secondary" id="reviewForest" type="button" style="display:block;width:100%;margin:12px 0;font-weight:700">🌲 Review Living Forest Discoveries</button><label><input type="checkbox" id="mossMotionToggle" checked> Gentle animation</label><label><input type="checkbox" id="alwaysWorkMossToggle"> Always Work alongside Moss</label><span class="muted" id="familiarStatus" aria-live="polite"></span></div></details>
+<details class="app-settings"><summary>⚙ Moss settings</summary><div class="friend-options"><button class="secondary" id="familiarToggle" type="button">Hide Moss</button><button class="secondary" id="familiarCelebrate" type="button">Say hello</button><button class="secondary" id="familiarMood" type="button">Check in with Moss</button><span class="muted">Moss’s growth is permanent and cannot be reset from here.</span><button class="secondary" id="reviewForest" type="button" style="display:block;width:100%;margin:12px 0;font-weight:700">🌲 Explore the Living Forest</button><label><input type="checkbox" id="mossMotionToggle" checked> Gentle animation</label><label><input type="checkbox" id="alwaysWorkMossToggle"> Always Work alongside Moss</label><span class="muted" id="familiarStatus" aria-live="polite"></span></div></details>
 </section>
 <section style="margin-top:14px"><div style="display:flex;gap:10px;align-items:center;justify-content:space-between"><h2 style="margin:0">Your tasks</h2><select id="filter" aria-label="Filter tasks" style="max-width:145px"><option value="active">Active</option><option value="all">All tasks</option><option value="done">Completed</option></select></div><p class="muted">Your list and the suggestion library are separate. Use a suggestion without adding it, or add it to your list.</p><p class="muted">Choose <strong>Work alongside Moss</strong> when you want a gentle body-doubling companion. Moss stays with you while you work; it does not start a task timer or mark anything complete. Use the separate break timer whenever you want.</p><div id="tasks"></div><p id="undoNotice" class="muted" aria-live="polite"></p><button id="undoDelete" class="secondary" hidden type="button">Undo delete</button></section>
 </div><div>
@@ -936,11 +1005,72 @@ function showForestDiscovery(item){
  modal.hidden=false;document.body.style.overflow='hidden';
 }
 function closeForestDiscovery(){const m=$('forestDiscoveryModal');if(m)m.hidden=true;document.body.style.overflow='';}
+const forestStories={
+ 25:{title:'A Fern Garden',image:'fern',story:'One morning, Moss noticed a little patch of green tucked beneath the older trees. He brushed away a few fallen leaves and discovered tiny fern fronds unfurling in the soft woodland light.',interaction:'Moss now visits this quiet corner when he needs a moment to rest. He likes watching each new frond uncurl, one small leaf at a time.',gift:'A peaceful place for new growth.',ending:'And you helped Moss find that!'},
+ 50:{title:'Mushrooms and Mossy Stones',image:'mushrooms',story:'After a gentle rain, Moss followed the earthy smell of the forest floor and found a circle of mushrooms nestled beside old, moss-covered stones.',interaction:'He carefully made a little path around them, leaving the mushrooms undisturbed. The stones became his favourite place to sit and listen to the forest.',gift:'A cozy gathering place full of quiet life.',ending:'And you helped Moss find that!'},
+ 75:{title:'Fireflies at Dusk',image:'fireflies',story:'As evening settled between the trees, tiny lights began to blink in the shadows. Moss had discovered a gathering of fireflies.',interaction:'He sits very still as they drift around him like little lanterns. Their gentle glow makes the forest feel magical after sunset.',gift:'A little starlight beneath the trees.',ending:'And you helped Moss find that!'},
+ 100:{title:'A Woodland Brook',image:'brook',story:'Moss heard a soft trickling sound beyond the ferns. Following it, he found a clear brook winding over smooth stones through the heart of the forest.',interaction:'He likes dipping his toes in the cool water and watching the ripples carry tiny leaves downstream.',gift:'A fresh, peaceful stream through the forest.',ending:'And you helped Moss find that!'},
+ 125:{title:'The Grove Sanctuary',image:'grove',story:'At the edge of the forest, Moss discovered an ancient tree with broad branches and roots that curled into a natural shelter.',interaction:'It became a safe haven for the small creatures of the woodland. Moss rests beneath its canopy, knowing the forest has become a home for many.',gift:'A sheltering place where the whole forest belongs.',ending:'And you helped Moss find that!'}
+};
+function openForestStory(at){
+ const item=forestStories[at],points=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
+ if(!item||points<at)return;
+ $('forestStoryImage').src=`./forest-${item.image}.jpg`;
+ $('forestStoryImage').alt=item.title;
+ $('forestStoryTitle').textContent=item.title;
+ $('forestStoryText').textContent=item.story;
+ $('forestStoryInteraction').textContent=item.interaction;
+ $('forestStoryGift').textContent=item.gift;
+ $('forestStoryEnding').textContent=item.ending;
+ $('forestStoryModal').hidden=false;
+}
+let forestBreathTimer=null,forestBreathPhase=0,forestBreathRunning=false;
+const forestBreathSteps=[{label:'Breathe in gently',seconds:4},{label:'Pause softly',seconds:2},{label:'Breathe out slowly',seconds:6}];
+function setForestBreathCue(){
+ const step=forestBreathSteps[forestBreathPhase%forestBreathSteps.length];
+ $('forestBreathingCue').textContent=step.label;
+ $('forestBreathOrb').classList.remove('inhale','pause','exhale');
+ $('forestBreathOrb').classList.add(forestBreathPhase%3===0?'inhale':forestBreathPhase%3===1?'pause':'exhale');
+}
+function startForestBreathing(){
+ if(forestBreathRunning)return;
+ forestBreathRunning=true;$('forestBreathingStart').textContent='Continue breathing';
+ setForestBreathCue();
+ let remaining=forestBreathSteps[forestBreathPhase%3].seconds;
+ forestBreathTimer=window.setInterval(()=>{
+  remaining--;
+  if(remaining<=0){forestBreathPhase=(forestBreathPhase+1)%3;setForestBreathCue();remaining=forestBreathSteps[forestBreathPhase].seconds;}
+ },1000);
+}
+function pauseForestBreathing(){
+ if(forestBreathTimer){window.clearInterval(forestBreathTimer);forestBreathTimer=null;}
+ forestBreathRunning=false;
+ $('forestBreathingCue').textContent='Paused. Take all the time you need.';
+ $('forestBreathOrb').classList.remove('inhale','pause','exhale');
+}
+function openForestBreathing(){
+ pauseForestBreathing();forestBreathPhase=0;
+ $('forestBreathingStart').textContent='Begin breathing';
+ $('forestBreathingCue').textContent="When you're ready, begin. There's nowhere else you need to be.";
+ $('forestBreathingNote').textContent='A gentle rhythm: breathe in, pause, and slowly breathe out. Follow your own comfortable pace.';
+ $('forestBreathingModal').hidden=false;
+}
+function closeForestBreathing(){pauseForestBreathing();$('forestBreathingModal').hidden=true;}
+function closeForestStory(){const m=$('forestStoryModal');if(m)m.hidden=true;}
 function openForestReview(){
  const modal=$('forestReviewModal'),gallery=$('forestGallery');if(!modal||!gallery)return;
  const evo=mossEvolution(),points=Math.max(Number(friend.lifetimePoints)||0,Number(friend.points)||0);
- $('forestReviewProgress').textContent=`${evo.unlocked.length} of ${evo.forestMilestones.length} discoveries unlocked · ${points} lifetime growth points`;
- gallery.innerHTML=evo.forestMilestones.map(item=>{const isOpen=points>=item.at;return `<div class="forest-gallery-item ${isOpen?'':'locked'}"><div class="forest-gallery-icon">${isOpen?item.icon:'🔒'}</div><div><strong>${isOpen?item.label:'Undiscovered woodland'}</strong><small>${isOpen?'Discovered':'Unlock at '+item.at+' lifetime growth points'}</small></div></div>`}).join('');
+ const next=evo.forestMilestones.find(item=>points<item.at);
+ $('forestReviewProgress').textContent=`${evo.unlocked.length} of ${evo.forestMilestones.length} discoveries awakened · ${points} lifetime growth points`;
+ const descriptions={25:'A quiet patch of ferns where Moss can rest and plan the next little step.',50:'A growing circle of mushrooms and soft, ancient stones.',75:'Tiny fireflies begin to dance between the trees at dusk.',100:'A clear, singing brook winds through the forest.',125:'A sheltering old tree offers a home to the small things of the woodland.'};
+ const art={25:'fern',50:'mushrooms',75:'fireflies',100:'brook',125:'grove'};
+ gallery.innerHTML=evo.forestMilestones.map(item=>{
+  const isOpen=points>=item.at;
+  const title=isOpen?item.label:'A hidden part of the forest';
+  return `<article class="forest-discovery-card ${isOpen?'awakened':'waiting'}"><div class="forest-discovery-art"><img src="./forest-${isOpen?art[item.at]:'grove'}.jpg" alt=""></div><div class="forest-discovery-detail"><button type="button" class="forest-story-link" data-forest-story="${item.at}" ${isOpen?'':'disabled'}>${title}</button><p>${isOpen?descriptions[item.at]:'This place is waiting to join Moss’s home.'}</p><small>${isOpen?'✦ Discovered · '+item.at+' growth points':'Unlock at '+item.at+' lifetime growth points'}</small></div><span class="forest-discovery-status">${isOpen?'✓':'· · ·'}</span></article>`;
+ }).join('');
+ $('forestNextNote').textContent=next?`${next.at-points} points until ${next.label}`:'Every discovery has found its place. The forest is yours.';
+ const bar=$('forestWorldBar');if(bar)bar.style.width=(evo.unlocked.length/evo.forestMilestones.length*100)+'%';
  modal.hidden=false;document.body.style.overflow='hidden';
 }
 function closeForestReview(){const m=$('forestReviewModal');if(m)m.hidden=true;document.body.style.overflow='';}
@@ -1194,7 +1324,14 @@ $('reviewForest').addEventListener('click',openForestReview);
 document.addEventListener('click',e=>{
  const target=e.target.closest('button,[role="dialog"]');
  if(!target)return;
+ if(target.id==='forestBreatheOpen'){openForestBreathing();return;}
+ if(target.id==='forestBreathingClose'){closeForestBreathing();return;}
+ if(target.id==='forestBreathingStart'){startForestBreathing();return;}
+ if(target.id==='forestBreathingStop'){pauseForestBreathing();return;}
  if(target.id==='forestReviewClose'){closeForestReview();return;}
+ if(target.id==='forestStoryClose'||target.id==='forestStoryDone'){closeForestStory();return;}
+ if(target.dataset&&target.dataset.forestStory){openForestStory(Number(target.dataset.forestStory));return;}
+ if(target.id==='forestStoryModal'&&e.target===target){closeForestStory();return;}
  if(target.id==='forestDiscoveryClose'){closeForestDiscovery();return;}
  if(target.id==='forestExplore'){closeForestDiscovery();openForestReview();return;}
  if(target.id==='forestReviewModal'&&e.target===target){closeForestReview();return;}
@@ -1202,6 +1339,8 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'){
+  if(!$('forestBreathingModal').hidden){closeForestBreathing();return;}
+  if(!$('forestStoryModal').hidden){closeForestStory();return;}
   if(!$('forestReviewModal').hidden)closeForestReview();
   if(!$('forestDiscoveryModal').hidden)closeForestDiscovery();
  }
@@ -1332,15 +1471,6 @@ render();renderFamiliar();paint();
 })();
 </script>
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./service-worker.js").catch(function (error) {
-      console.warn("PWA offline support could not be registered:", error);
-    });
-  });
-}
-</script>
 
 
 <div id="pwaInstallHelp" class="pwa-help-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="pwaHelpTitle">
@@ -1384,16 +1514,86 @@ if ("serviceWorker" in navigator) {
   help.addEventListener('click',function(e){if(e.target===help)closeHelp();});
   if(isIOS||isAndroid) btn.hidden=false;
   hideIfInstalled();
-  if('serviceWorker' in navigator && location.protocol==='https:'){
-    window.addEventListener('load',function(){navigator.serviceWorker.register('./service-worker.js').catch(function(){});});
-  }
 })();
 </script>
 
 <div id="forestDiscoveryModal" class="forest-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestDiscoveryTitle">
  <div class="forest-modal-card"><div class="forest-modal-art" id="forestDiscoveryArt">🌿</div><div class="tag">Living Forest discovery</div><h2 id="forestDiscoveryTitle">A New Discovery!</h2><p class="forest-modal-copy" id="forestDiscoveryDescription"></p><p class="forest-modal-copy" id="forestDiscoveryMilestone"></p><div class="forest-modal-actions"><button id="forestExplore" type="button">Explore the Living Forest</button><button id="forestDiscoveryClose" class="secondary" type="button">Lovely</button></div></div>
 </div>
-<div id="forestReviewModal" class="forest-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
- <div class="forest-modal-card"><div class="forest-modal-art">🌲✨</div><h2 id="forestReviewTitle">The Living Forest</h2><p class="forest-modal-copy">The forest remembers every step you’ve taken.</p><p class="forest-modal-copy" id="forestReviewProgress"></p><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestReviewClose" type="button">Back to Moss</button></div></div>
+<div id="forestReviewModal" class="forest-modal forest-world-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestReviewTitle">
+ <div class="forest-world-card"><div class="forest-world-hero"><img src="./living-forest-scene.jpg" alt="Moss resting in his growing woodland home"><div class="forest-world-heading"><h2 id="forestReviewTitle">The Living Forest</h2><p>Moss’s home, growing with every little step.</p></div></div>
+ <div class="forest-world-progress"><div><strong>🌲 Your discoveries</strong><span id="forestReviewProgress"></span></div><div class="forest-world-bar"><span id="forestWorldBar"></span></div><p id="forestNextNote"></p></div>
+ <div class="forest-world-intro">Every discovery becomes part of Moss’s world. The forest remembers.</div><div id="forestGallery" class="forest-gallery"></div><div class="forest-modal-actions"><button id="forestBreatheOpen" type="button">☾ Breathe with Moss</button><button id="forestReviewClose" type="button">← Back to Moss</button></div></div>
+ <div id="forestStoryModal" class="forest-story-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestStoryTitle">
+  <article class="forest-story-card">
+   <button type="button" class="forest-story-x" id="forestStoryClose" aria-label="Close story">×</button>
+   <img id="forestStoryImage" class="forest-story-image" src="./forest-fern.jpg" alt="">
+   <div class="forest-story-copy"><p class="forest-story-kicker">A LIVING FOREST STORY</p><h2 id="forestStoryTitle"></h2>
+    <p id="forestStoryText"></p><h3>Moss’s little part in the story</h3><p id="forestStoryInteraction"></p>
+    <div class="forest-story-gift" id="forestStoryGift"></div><p class="forest-story-ending" id="forestStoryEnding"></p>
+    <button type="button" id="forestStoryDone" class="forest-story-done">Back to the forest</button>
+   </div>
+  </article>
+ </div>
+ <div id="forestBreathingModal" class="forest-story-modal forest-breathing-modal" hidden role="dialog" aria-modal="true" aria-labelledby="forestBreathingTitle">
+  <article class="forest-breathing-card">
+   <button type="button" class="forest-story-x" id="forestBreathingClose" aria-label="Close breathing break">×</button>
+   <div class="forest-breathing-scene">
+    <img src="./moss-form-5.webp" alt="Moss resting peacefully in the forest">
+    <div class="forest-breath-orb" id="forestBreathOrb"></div>
+   </div>
+   <div class="forest-breathing-copy">
+    <p class="forest-story-kicker">A QUIET MOMENT IN THE WOODS</p>
+    <h2 id="forestBreathingTitle">Breathe with Moss</h2>
+    <p id="forestBreathingCue" aria-live="polite">When you're ready, begin. There's nowhere else you need to be.</p>
+    <div class="forest-breathing-controls"><button type="button" id="forestBreathingStart">Begin breathing</button><button type="button" class="secondary" id="forestBreathingStop">Pause</button></div>
+    <p class="forest-breathing-note" id="forestBreathingNote">A gentle rhythm: breathe in, pause, and slowly breathe out. Follow your own comfortable pace.</p>
+    <p class="forest-story-ending">The forest will be here when you return. Take your time.</p>
+   </div>
+  </article>
+ </div>
 </div>
+
+<style>
+#appUpdateNotice{position:fixed;z-index:10050;left:16px;right:16px;bottom:16px;max-width:520px;margin:0 auto;padding:14px 16px;background:#203b2d;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px;font:inherit}
+#appUpdateNotice[hidden]{display:none}
+#appUpdateNotice .update-copy{flex:1;font-size:14px;line-height:1.35}
+#appUpdateNotice button{border:0;border-radius:999px;padding:10px 14px;background:#e7f0df;color:#203b2d;font-weight:700;white-space:nowrap}
+</style>
+<div id="appUpdateNotice" role="status" aria-live="polite" hidden><div class="update-copy"><strong>Moss has something new!</strong><br>A fresh version is ready.</div><button id="appUpdateNow" type="button">Update now</button></div>
+<script>
+(function(){
+  if(!('serviceWorker' in navigator) || location.protocol!=='https:') return;
+  var notice=document.getElementById('appUpdateNotice');
+  var updateButton=document.getElementById('appUpdateNow');
+  var refreshing=false;
+  var waitingWorker=null;
+  function showUpdate(worker){waitingWorker=worker;notice.hidden=false;}
+  function checkWaiting(reg){if(reg.waiting && navigator.serviceWorker.controller) showUpdate(reg.waiting);}
+  updateButton.addEventListener('click',function(){
+    if(!waitingWorker) return;
+    updateButton.disabled=true;updateButton.textContent='Updating…';
+    waitingWorker.postMessage({type:'SKIP_WAITING'});
+  });
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    if(refreshing) return;refreshing=true;window.location.reload();
+  });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(function(reg){
+      checkWaiting(reg);
+      reg.addEventListener('updatefound',function(){
+        var installing=reg.installing;if(!installing) return;
+        installing.addEventListener('statechange',function(){
+          if(installing.state==='installed' && navigator.serviceWorker.controller) checkWaiting(reg);
+        });
+      });
+      reg.update().catch(function(){});
+      document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState==='visible') reg.update().catch(function(){});
+      });
+    }).catch(function(error){console.warn('PWA update check could not be registered:',error);});
+  });
+})();
+</script>
+
 </body></html>

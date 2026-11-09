@@ -25,3 +25,12 @@ v54 changes:
 Version 56: clearer Living Forest review control, first-load recognition of already-earned discoveries, and cache refresh.
 
 Version 56: fixed Living Forest modal controls with delegated click handling and Escape-to-close support; cache version v12.
+
+
+Version 57: Living Forest redesigned as Moss's illustrated woodland home, with evolving discovery progress and renamed Explore the Living Forest button. Cache version v13.
+
+
+Version 58: clickable Living Forest reward titles open illustrated story cards describing each discovery and Moss's interaction. Includes personal 'And you helped Moss find that!' message. Cache version v14.
+
+
+Version 59: Adds an optional Breathe with Moss experience inside the Living Forest sanctuary. Gentle visual inhale, pause and exhale cues; can be paused or closed at any time. Cache version v15.
